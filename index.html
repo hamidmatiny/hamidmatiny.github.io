@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hamid Matiny | Alien Knowledge in AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+    
+    :root {
+      --neon-cyan: #00f5ff;
+      --neon-purple: #a855f7;
+    }
+    
+    body {
+      font-family: 'Inter', system_ui, sans-serif;
+    }
+    
+    .title-font {
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .hero-bg {
+      background: radial-gradient(circle at center, #1a0033 0%, #0a0a1f 70%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://picsum.photos/id/1015/1920/1080') center/cover no-repeat;
+      opacity: 0.12;
+      z-index: 0;
+      animation: stars 60s linear infinite;
+    }
+    
+    @keyframes stars {
+      from { background-position: 0 0; }
+      to { background-position: 2000px 2000px; }
+    }
+    
+    .neon-text {
+      text-shadow: 
+        0 0 10px var(--neon-cyan),
+        0 0 20px var(--neon-cyan),
+        0 0 40px var(--neon-cyan);
+    }
+    
+    .project-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 0 0 40px -10px var(--neon-cyan);
+    }
+    
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background: linear-gradient(to right, var(--neon-cyan), var(--neon-purple));
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover:after {
+      width: 100%;
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 3px;
+      bottom: -6px;
+      left: 20%;
+      background: linear-gradient(to right, var(--neon-cyan), transparent);
+    }
+  </style>
+</head>
+<body class="bg-[#0a0a1f] text-white overflow-x-hidden">
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a0a1f]/80 backdrop-blur-xl border-b border-cyan-500/20">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center text-2xl shadow-[0_0_20px_#00f5ff]">
+          👽
+        </div>
+        <span class="title-font text-2xl font-bold tracking-tighter neon-text">HAMID MATINY</span>
+      </div>
+      
+      <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+        <a href="#about" class="nav-link hover:text-cyan-400 transition-colors">ABOUT</a>
+        <a href="#projects" class="nav-link hover:text-cyan-400 transition-colors">PROJECTS</a>
+        <a href="#skills" class="nav-link hover:text-cyan-400 transition-colors">SKILLS</a>
+        <a href="#experience" class="nav-link hover:text-cyan-400 transition-colors">EXPERIENCE</a>
+        <a href="#contact" class="nav-link hover:text-cyan-400 transition-colors">CONTACT</a>
+      </div>
+      
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/hamidmatiny" target="_blank"
+           class="px-6 py-2.5 rounded-3xl bg-white/10 hover:bg-white/20 border border-white/30 flex items-center gap-2 text-sm font-medium transition-all hover:border-cyan-400">
+          <i class="fab fa-github"></i>
+          <span>GITHUB</span>
+        </a>
+        <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"
+                class="px-8 py-2.5 bg-gradient-to-r from-cyan-400 to-purple-500 hover:from-cyan-300 hover:to-purple-400 text-black font-semibold rounded-3xl text-sm transition-all">
+          LET'S CONNECT
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="home" class="hero-bg min-h-screen flex items-center relative pt-20">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+      <div class="space-y-8 z-10">
+        <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-6 py-2 rounded-3xl border border-cyan-400/30">
+          <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+          <span class="text-emerald-400 text-sm font-medium tracking-widest">NOW HIRING ALIEN-LEVEL AI ENGINEERS</span>
+        </div>
+        
+        <h1 class="title-font text-7xl md:text-8xl font-black leading-none tracking-tighter neon-text">
+          MOHAMMADREZA<br>(HAMID)<br>MATINY
+        </h1>
+        
+        <p class="max-w-lg text-2xl text-cyan-200 font-light">
+          Professional AI Engineer with <span class="text-purple-400 font-medium">alien knowledge</span> in autonomous perception systems
+        </p>
+        
+        <div class="flex flex-wrap gap-4">
+          <a href="https://github.com/hamidmatiny" target="_blank"
+             class="group px-10 py-5 bg-white text-black font-semibold rounded-3xl flex items-center gap-3 hover:scale-105 transition-all">
+            <i class="fab fa-github text-2xl"></i>
+            <span>EXPLORE MY CODE UNIVERSE</span>
+          </a>
+          
+          <a href="https://www.linkedin.com/in/mohammadreza-matiny-46812121a" target="_blank"
+             class="px-10 py-5 border-2 border-cyan-400 hover:bg-cyan-400/10 rounded-3xl flex items-center gap-3 transition-all">
+            <i class="fab fa-linkedin text-2xl"></i>
+            <span>CONNECT IN THIS DIMENSION</span>
+          </a>
+        </div>
+        
+        <div class="flex items-center gap-8 text-sm pt-6">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-location-dot text-cyan-400"></i>
+            <span>Fredericton, NB • Willing to relocate anywhere in the galaxy</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="relative z-10 flex justify-center">
+        <div class="relative">
+          <img src="assets/img.jpeg" alt="Hamid Matiny" 
+               class="w-full max-w-md rounded-3xl shadow-2xl border-4 border-cyan-400/30">
+          <div class="absolute -inset-6 bg-gradient-to-br from-cyan-400 to-purple-500 opacity-20 blur-3xl -z-10 rounded-[4rem]"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs tracking-widest">
+      <span class="text-cyan-400">SCROLL TO ENTER THE MATRIX</span>
+      <i class="fa-solid fa-chevron-down animate-bounce text-2xl"></i>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-32 bg-[#0f0f24]">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-5xl title-font font-bold mb-16 text-center section-title">About Me</h2>
+      
+      <div class="grid md:grid-cols-12 gap-16 items-center">
+        <div class="md:col-span-7 space-y-8 text-lg leading-relaxed text-gray-300">
+          <p class="text-2xl font-light">
+            Results-driven <span class="text-cyan-400 font-medium">Machine Learning Engineer</span> and Data Annotator with <span class="font-semibold text-purple-400">alien-level expertise</span> in autonomous vehicle perception, AI/ML, and deep learning.
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-black/60 border border-cyan-400/20 p-6 rounded-3xl">
+              <div class="text-4xl mb-3">🚀</div>
+              <p class="font-medium">1+ years at Torc Robotics</p>
+              <p class="text-sm text-gray-400">LiDAR & camera annotation for autonomous trucks</p>
+            </div>
+            <div class="bg-black/60 border border-cyan-400/20 p-6 rounded-3xl">
+              <div class="text-4xl mb-3">🧠</div>
+              <p class="font-medium">5+ years building perception models</p>
+              <p class="text-sm text-gray-400">2D/3D detection, tracking & sensor fusion</p>
+            </div>
+            <div class="bg-black/60 border border-cyan-400/20 p-6 rounded-3xl">
+              <div class="text-4xl mb-3">⚡</div>
+              <p class="font-medium">MLOps & PyTorch pipelines</p>
+              <p class="text-sm text-gray-400">Docker, FastAPI, cloud deployment & auto-labeling</p>
+            </div>
+          </div>
+          
+          <p>
+            I’m obsessed with creating high-quality annotations and perception systems that make autonomy not just safe — but <span class="italic">otherworldly</span>.
+            This portfolio is my transmission from the edge of known intelligence.
+          </p>
+        </div>
+        
+        <div class="md:col-span-5">
+          <img src="assets/img.jpeg" alt="Banner" class="rounded-3xl shadow-2xl border border-purple-500/30">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="py-32 bg-[#0a0a1f]">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-5xl title-font font-bold mb-16 text-center section-title">Key Projects</h2>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Project 1 -->
+        <div class="project-card bg-gradient-to-br from-[#1a1a2e] to-[#0f0f24] border border-cyan-400/30 rounded-3xl overflow-hidden">
+          <div class="h-2 bg-gradient-to-r from-cyan-400 to-purple-500"></div>
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-6">
+              <h3 class="text-3xl font-semibold title-font">Auto-Driving / LiDAR-Radar Fusion</h3>
+              <span class="text-xs px-4 py-1.5 bg-yellow-400/10 text-yellow-400 rounded-3xl">TORC ROBOTICS</span>
+            </div>
+            <p class="text-gray-400 mb-8">
+              3D object detection & tracking with multi-sensor fusion (LiDAR + Radar) using PointPillars and custom architectures. Optimized for fog & rain.
+            </p>
+            <p class="text-sm text-gray-500 mb-6">Proprietary work at Torc Robotics — details available upon request</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">PointPillars</span>
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">Sensor Fusion</span>
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">BEV</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card bg-gradient-to-br from-[#1a1a2e] to-[#0f0f24] border border-cyan-400/30 rounded-3xl overflow-hidden">
+          <div class="h-2 bg-gradient-to-r from-cyan-400 to-purple-500"></div>
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-6">
+              <h3 class="text-3xl font-semibold title-font">ViT-FastAPI-Cloud-Deploy</h3>
+              <a href="https://github.com/hamidmatiny/vit-fastapi-cloud-deploy" target="_blank"
+                 class="text-cyan-400 hover:text-cyan-300 flex items-center gap-2 text-sm">
+                <i class="fab fa-github"></i> REPO
+              </a>
+            </div>
+            <p class="text-gray-400 mb-8">
+              Deployed Vision Transformer on CIFAR-10 via FastAPI, Docker & Google Cloud App Engine. Achieved ~40% latency reduction.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">ViT</span>
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">FastAPI</span>
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">GCP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card bg-gradient-to-br from-[#1a1a2e] to-[#0f0f24] border border-cyan-400/30 rounded-3xl overflow-hidden">
+          <div class="h-2 bg-gradient-to-r from-cyan-400 to-purple-500"></div>
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-6">
+              <h3 class="text-3xl font-semibold title-font">Cuda Optimization</h3>
+              <a href="https://github.com/hamidmatiny/Cuda_Optimization" target="_blank"
+                 class="text-cyan-400 hover:text-cyan-300 flex items-center gap-2 text-sm">
+                <i class="fab fa-github"></i> REPO
+              </a>
+            </div>
+            <p class="text-gray-400 mb-8">
+              Optimized Transformers & ViT on Apple M3 (MPS) using AMP, torch.compile, gradient checkpointing. 2–4× speedups and 60% memory savings.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">MPS</span>
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">torch.compile</span>
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">AMP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card bg-gradient-to-br from-[#1a1a2e] to-[#0f0f24] border border-cyan-400/30 rounded-3xl overflow-hidden">
+          <div class="h-2 bg-gradient-to-r from-cyan-400 to-purple-500"></div>
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-6">
+              <h3 class="text-3xl font-semibold title-font">Advanced Deep Learning</h3>
+              <a href="https://github.com/hamidmatiny/Advanced_Deep_Learning" target="_blank"
+                 class="text-cyan-400 hover:text-cyan-300 flex items-center gap-2 text-sm">
+                <i class="fab fa-github"></i> REPO
+              </a>
+            </div>
+            <p class="text-gray-400 mb-8">
+              Built Transformers from scratch + Hugging Face, RNNs, seq2seq with attention. Applied to semantic segmentation & BEV tasks.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">Transformers</span>
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">Hugging Face</span>
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">Attention</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card bg-gradient-to-br from-[#1a1a2e] to-[#0f0f24] border border-cyan-400/30 rounded-3xl overflow-hidden col-span-2 md:col-span-1">
+          <div class="h-2 bg-gradient-to-r from-cyan-400 to-purple-500"></div>
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-6">
+              <h3 class="text-3xl font-semibold title-font">MLOps & Deployment</h3>
+              <a href="https://github.com/hamidmatiny/mlops_deployment" target="_blank"
+                 class="text-cyan-400 hover:text-cyan-300 flex items-center gap-2 text-sm">
+                <i class="fab fa-github"></i> REPO
+              </a>
+            </div>
+            <p class="text-gray-400 mb-8">
+              End-to-end Dockerized pipelines, FastAPI serving, Google Cloud Run/App Engine, logging & monitoring.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">Docker</span>
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">FastAPI</span>
+              <span class="px-4 py-1 text-xs bg-cyan-900/50 text-cyan-400 rounded-3xl">CI/CD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="py-32 bg-[#0f0f24]">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-5xl title-font font-bold mb-16 text-center section-title">Technical Arsenal</h2>
+      
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="bg-black/60 p-8 rounded-3xl border border-cyan-400/20 hover:border-cyan-400 transition-colors">
+          <h4 class="font-semibold text-cyan-400 mb-6 text-xl">Perception & AV</h4>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-pill">2D/3D Detection</span>
+            <span class="skill-pill">LiDAR + Radar Fusion</span>
+            <span class="skill-pill">YOLOv8</span>
+            <span class="skill-pill">PointPillars</span>
+            <span class="skill-pill">BEV</span>
+            <span class="skill-pill">Pseudo-labeling</span>
+          </div>
+        </div>
+        
+        <div class="bg-black/60 p-8 rounded-3xl border border-cyan-400/20 hover:border-cyan-400 transition-colors">
+          <h4 class="font-semibold text-cyan-400 mb-6 text-xl">Frameworks & Tools</h4>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-pill">PyTorch</span>
+            <span class="skill-pill">Lightning</span>
+            <span class="skill-pill">Hugging Face</span>
+            <span class="skill-pill">Docker</span>
+            <span class="skill-pill">MLflow</span>
+            <span class="skill-pill">GitHub Actions</span>
+          </div>
+        </div>
+        
+        <div class="bg-black/60 p-8 rounded-3xl border border-cyan-400/20 hover:border-cyan-400 transition-colors">
+          <h4 class="font-semibold text-cyan-400 mb-6 text-xl">Optimization & Deployment</h4>
+          <div class="flex flex-wrap gap-3">
+            <span class="skill-pill">torch.compile</span>
+            <span class="skill-pill">AMP (Mixed Precision)</span>
+            <span class="skill-pill">GCP App Engine</span>
+            <span class="skill-pill">FastAPI</span>
+            <span class="skill-pill">MPS / CUDA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE & EDUCATION -->
+  <section id="experience" class="py-32 bg-[#0a0a1f]">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="space-y-24">
+        <div>
+          <h2 class="text-5xl title-font font-bold mb-12 text-center section-title">Experience</h2>
+          <div class="bg-black/60 border border-cyan-400/30 rounded-3xl p-10">
+            <div class="flex flex-col md:flex-row gap-8">
+              <div class="md:w-48 text-sm text-gray-400">2024 — Present</div>
+              <div>
+                <h3 class="text-3xl font-semibold">Machine Learning Engineer & Data Annotator</h3>
+                <p class="text-cyan-400 text-xl mb-6">Torc Robotics</p>
+                <ul class="space-y-4 text-gray-300">
+                  <li class="flex gap-4"><span class="text-cyan-400">→</span> Annotated LiDAR & camera data for autonomous trucks</li>
+                  <li class="flex gap-4"><span class="text-cyan-400">→</span> Built & optimized perception models and auto-labeling pipelines</li>
+                  <li class="flex gap-4"><span class="text-cyan-400">→</span> Collaborated on YOLO-based safety systems</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h2 class="text-5xl title-font font-bold mb-12 text-center section-title">Education</h2>
+          <div class="bg-black/60 border border-purple-400/30 rounded-3xl p-10 text-center">
+            <p class="text-2xl">B.Sc. Software Engineering</p>
+            <p class="text-cyan-400">Shahid Rajaei University • 2011–2017</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-32 bg-gradient-to-b from-[#0a0a1f] to-black">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-5xl title-font font-bold mb-8">Transmit Message</h2>
+      <p class="text-xl text-gray-400 max-w-md mx-auto mb-12">hamidmatiny@gmail.com • +1 (506) 471-1611</p>
+      
+      <div class="flex flex-col sm:flex-row gap-6 justify-center">
+        <a href="mailto:hamidmatiny@gmail.com" 
+           class="px-12 py-6 bg-cyan-400 text-black font-bold rounded-3xl text-lg hover:bg-white transition-all flex items-center justify-center gap-4">
+          <i class="fa-solid fa-envelope"></i>
+          SEND TRANSMISSION
+        </a>
+        
+        <a href="https://www.linkedin.com/in/mohammadreza-matiny-46812121a" target="_blank"
+           class="px-12 py-6 border-2 border-purple-400 hover:bg-purple-400/10 rounded-3xl text-lg transition-all">
+          LINKEDIN TRANSMITTER
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 border-t border-cyan-400/20 bg-black">
+    <div class="max-w-6xl mx-auto px-6 text-center text-xs text-gray-500">
+      <p>© 2026 Mohammadreza (Hamid) Matiny • Built with alien intelligence and Tailwind</p>
+      <p class="mt-2">Portfolio site for hamidmatiny.github.io • All rights reserved across dimensions</p>
+    </div>
+  </footer>
+
+  <script>
+    // Tailwind script already loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mobile menu could be added here if needed (kept desktop-first for simplicity)
+      console.log('%c👽 Welcome to the alien AI portfolio', 'color:#00f5ff; font-family:Orbitron');
+    });
+  </script>
+</body>
+</html>
