@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Home"
+---
+
 # Mohammadreza (Hamid) Matiny
 
 <p align="center">
@@ -71,4 +76,4 @@ I’m passionate about high‑quality annotations and robust perception systems 
 
 ---
 
-> Visit [**hamidmatiny.github.io**](https://hamidmatiny.github.io) to see this content rendered via Jekyll. Add or modify pages under `index.md` or other markdown files.
+> This page is built with Jekyll using the `time-machine` remote theme. Feel free to fork and customize!
