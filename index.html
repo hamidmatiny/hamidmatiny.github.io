@@ -7,228 +7,203 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
     
-    :root {
-      --primary: #0ea5e9;
-      --accent: #22d3ee;
-      --dark: #0f172a;
-      --card: #1e2937;
-    }
-
     body {
       font-family: 'Inter', system_ui, sans-serif;
     }
+    .heading-font {
+      font-family: 'Playfair Display', sans-serif;
+    }
 
     .hero-bg {
-      background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%);
-    }
-
-    .section-title {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .section-title:after {
-      content: '';
-      position: absolute;
-      width: 60px;
-      height: 4px;
-      background: linear-gradient(to right, var(--primary), var(--accent));
-      bottom: -8px;
-      left: 0;
-      border-radius: 2px;
+      background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), url('assets/bc0.jpeg') center/cover no-repeat fixed;
     }
 
     .project-card {
-      background: var(--card);
-      border: 1px solid #334155;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
     .project-card:hover {
-      transform: translateY(-12px);
-      border-color: var(--primary);
-      box-shadow: 0 25px 50px -12px rgb(15 23 42 / 0.4);
+      transform: translateY(-15px);
+      box-shadow: 0 30px 60px -15px rgba(14, 165, 233, 0.25);
     }
 
     .nav-link {
       position: relative;
-      transition: color 0.3s ease;
     }
-    
     .nav-link:after {
       content: '';
       position: absolute;
       width: 0;
       height: 2px;
-      bottom: -4px;
+      bottom: -6px;
       left: 0;
-      background: var(--primary);
-      transition: width 0.3s ease;
+      background: #0ea5e9;
+      transition: all 0.4s ease;
     }
-    
     .nav-link:hover:after {
       width: 100%;
     }
   </style>
 </head>
-<body class="bg-[#0f172a] text-slate-200 overflow-x-hidden">
+<body class="bg-slate-950 text-slate-200">
 
-  <!-- NAVBAR -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0f172a]/90 backdrop-blur-lg border-b border-slate-700">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-gradient-to-br from-sky-500 to-cyan-400 rounded-2xl flex items-center justify-center font-bold text-xl shadow-lg">MM</div>
-        <span class="text-2xl font-bold tracking-tight text-white">Mohammadreza Matiny</span>
-      </div>
-      
-      <div class="hidden md:flex items-center gap-10 text-sm font-medium">
-        <a href="#about" class="nav-link hover:text-white">About</a>
-        <a href="#projects" class="nav-link hover:text-white">Projects</a>
-        <a href="#skills" class="nav-link hover:text-white">Skills</a>
-        <a href="#experience" class="nav-link hover:text-white">Experience</a>
-        <a href="#contact" class="nav-link hover:text-white">Contact</a>
-      </div>
-
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
       <div class="flex items-center gap-4">
-        <a href="https://github.com/hamidmatiny" target="_blank"
-           class="px-5 py-2.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-slate-600 hover:border-slate-400 flex items-center gap-2 transition-all">
-          <i class="fab fa-github"></i>
-          <span class="hidden sm:inline">GitHub</span>
-        </a>
-        <a href="#contact"
-           class="px-6 py-2.5 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-2xl transition-all">
-          Get In Touch
-        </a>
+        <div class="text-2xl font-bold tracking-tight">Hamid Matiny</div>
       </div>
+      <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <a href="https://github.com/hamidmatiny" target="_blank" 
+         class="px-6 py-3 border border-slate-400 hover:border-sky-400 rounded-full flex items-center gap-2 transition-all">
+        <i class="fab fa-github"></i>
+        <span>GitHub</span>
+      </a>
     </div>
   </nav>
 
   <!-- HERO -->
-  <header id="home" class="hero-bg min-h-screen flex items-center pt-20">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div class="space-y-10">
-        <div class="inline-flex items-center gap-3 bg-emerald-500/10 text-emerald-400 px-6 py-3 rounded-3xl text-sm font-medium border border-emerald-500/20">
-          <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-          Open to Machine Learning Engineer Roles
-        </div>
-
-        <h1 class="text-6xl md:text-7xl font-bold leading-none tracking-tighter text-white">
-          Mohammadreza<br> Matiny
+  <header id="home" class="hero-bg min-h-screen flex items-center">
+    <div class="max-w-7xl mx-auto px-8 pt-32 pb-20">
+      <div class="max-w-3xl">
+        <h1 class="heading-font text-7xl md:text-8xl font-bold leading-none tracking-tighter mb-6">
+          Mohammadreza<br>(Hamid) Matiny
         </h1>
-
-        <p class="text-2xl md:text-3xl text-slate-300 font-light">
-          Machine Learning Engineer specialized in <span class="text-sky-400 font-medium">Autonomous Vehicle Perception</span>
+        <p class="text-3xl text-slate-300 mb-10">
+          Machine Learning Engineer &amp; Data Scientist
         </p>
-
-        <div class="flex flex-wrap gap-4">
-          <a href="#projects" 
-             class="px-8 py-4 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-2xl transition-all flex items-center gap-3">
-            View My Projects
+        <p class="text-xl text-slate-400 max-w-lg">
+          Building production-grade perception systems for autonomous vehicles with deep learning and MLOps.
+        </p>
+        <div class="mt-12 flex flex-wrap gap-5">
+          <a href="#projects" class="px-10 py-5 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-2xl text-lg transition-all">
+            Explore My Work
           </a>
-          <a href="https://www.linkedin.com/in/mohammadreza-matiny-46812121a" target="_blank"
-             class="px-8 py-4 border border-slate-400 hover:border-white rounded-2xl transition-all flex items-center gap-3">
-            <i class="fab fa-linkedin"></i>
-            LinkedIn
+          <a href="https://hamidmatiny.github.io/assets/Mohammadreza_Matiny_Data_Scientist.pdf" target="_blank"
+             class="px-10 py-5 border border-slate-400 hover:border-white rounded-2xl text-lg transition-all flex items-center gap-3">
+            <i class="fa-solid fa-download"></i>
+            Download CV
           </a>
         </div>
-
-        <div class="flex items-center gap-8 text-sm">
-          <div class="flex items-center gap-2">
-            <i class="fa-solid fa-location-dot text-sky-400"></i>
-            <span>Fredericton, NB • Willing to relocate</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Profile Image -->
-      <div class="flex justify-center">
-        <img src="assets/img.jpeg" alt="Mohammadreza Matiny" 
-             class="rounded-3xl shadow-2xl max-w-md border border-slate-700 object-cover">
       </div>
     </div>
   </header>
 
   <!-- ABOUT -->
-  <section id="about" class="py-28 bg-[#1e2937]">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-5xl font-bold mb-16 text-center section-title">About Me</h2>
-      
-      <div class="grid md:grid-cols-12 gap-16 items-center">
-        <div class="md:col-span-7 space-y-8 text-lg leading-relaxed text-slate-300">
-          <p>
-            Results-driven Machine Learning Engineer with strong expertise in autonomous vehicle perception, deep learning, and MLOps. 
-            I bring hands-on experience annotating LiDAR & camera data at <span class="text-sky-400 font-medium">Torc Robotics</span> and building production-grade perception systems.
+  <section id="about" class="py-28 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-12 gap-16 items-center">
+      <div class="md:col-span-5">
+        <img src="assets/me1.jpeg" alt="Hamid Matiny" class="rounded-3xl shadow-2xl w-full">
+      </div>
+      <div class="md:col-span-7">
+        <h2 class="text-5xl heading-font font-bold mb-10">About Me</h2>
+        <div class="prose prose-lg prose-invert max-w-none text-slate-300">
+          <p class="text-xl leading-relaxed">
+            Results-driven Machine Learning Engineer with 6+ years of experience building, optimizing, and deploying production-grade ML models. 
+            Currently contributing to <strong>Torc Robotics</strong> autonomous truck perception systems using large-scale LiDAR and camera data.
           </p>
-          
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-slate-800/50 border border-slate-600 p-6 rounded-3xl">
-              <div class="text-4xl mb-4">🚀</div>
-              <p class="font-semibold">1+ year at Torc Robotics</p>
-              <p class="text-sm text-slate-400">LiDAR & Camera annotation for autonomous trucks</p>
-            </div>
-            <div class="bg-slate-800/50 border border-slate-600 p-6 rounded-3xl">
-              <div class="text-4xl mb-4">🧠</div>
-              <p class="font-semibold">Perception Systems</p>
-              <p class="text-sm text-slate-400">2D/3D detection, tracking & sensor fusion</p>
-            </div>
-            <div class="bg-slate-800/50 border border-slate-600 p-6 rounded-3xl">
-              <div class="text-4xl mb-4">⚡</div>
-              <p class="font-semibold">MLOps & Optimization</p>
-              <p class="text-sm text-slate-400">FastAPI, Docker, Cloud & Apple Silicon</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="md:col-span-5">
-          <img src="assets/img.jpeg" alt="Hamid Matiny" class="rounded-3xl shadow-2xl w-full border border-slate-600">
+          <p class="text-xl leading-relaxed mt-6">
+            Passionate about turning complex, imperfect data into reliable, high-accuracy AI systems using PyTorch, sensor fusion, MLOps, and modern optimization techniques.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects" class="py-28 bg-[#0f172a]">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-5xl font-bold mb-16 text-center section-title">Key Projects</h2>
+  <section id="projects" class="py-28 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 class="text-5xl heading-font font-bold text-center mb-16">Featured Projects</h2>
       
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- Add all your projects here with the new card style -->
-        <!-- Example (repeat pattern for all) -->
-        <div class="project-card rounded-3xl overflow-hidden">
+      <div class="grid md:grid-cols-2 gap-10">
+        <div class="project-card bg-slate-900 border border-slate-700 rounded-3xl overflow-hidden">
+          <img src="assets/bc1.jpeg" alt="Project" class="w-full h-64 object-cover">
           <div class="p-8">
-            <div class="flex justify-between items-start mb-6">
-              <h3 class="text-2xl font-semibold">Multi-Modal Object Detection for Autonomous Driving</h3>
-              <a href="https://github.com/hamidmatiny/Auto_driving" target="_blank" class="text-sky-400 hover:text-sky-300">
-                <i class="fab fa-github text-2xl"></i>
-              </a>
-            </div>
-            <p class="text-slate-400 mb-6">
-              Comprehensive sensor fusion system (LiDAR + Radar + Camera) for robust 3D object detection in autonomous vehicles.
-            </p>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-4 py-1.5 text-xs bg-slate-800 text-sky-400 rounded-full">Sensor Fusion</span>
-              <span class="px-4 py-1.5 text-xs bg-slate-800 text-sky-400 rounded-full">LiDAR</span>
-              <span class="px-4 py-1.5 text-xs bg-slate-800 text-sky-400 rounded-full">PointPillars</span>
-            </div>
+            <h3 class="text-2xl font-semibold mb-3">Cuda Optimization (MPS)</h3>
+            <p class="text-slate-400 mb-6">Achieved 2-4x speedups and ~60% memory reduction on Apple M3 using mixed precision, torch.compile, and advanced optimization techniques.</p>
+            <a href="https://github.com/hamidmatiny/Cuda_Optimization" target="_blank" class="text-sky-400 hover:text-sky-300 flex items-center gap-2">
+              View on GitHub <i class="fa-solid fa-arrow-right"></i>
+            </a>
           </div>
         </div>
 
-        <!-- Repeat similar blocks for all other projects (ViT-FastAPI, Cuda Optimization, etc.) -->
-        <!-- I kept the content exactly the same, only styling changed -->
+        <div class="project-card bg-slate-900 border border-slate-700 rounded-3xl overflow-hidden">
+          <img src="assets/bc2.jpeg" alt="Project" class="w-full h-64 object-cover">
+          <div class="p-8">
+            <h3 class="text-2xl font-semibold mb-3">ViT-FastAPI Cloud Deploy</h3>
+            <p class="text-slate-400 mb-6">Productionized Vision Transformer models using FastAPI, Docker, and deployed on Google Cloud with significant latency reduction.</p>
+            <a href="#" target="_blank" class="text-sky-400 hover:text-sky-300 flex items-center gap-2">
+              View on GitHub <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
 
+        <!-- Add more project cards similarly using bc3.jpeg to bc5.jpeg -->
       </div>
     </div>
   </section>
 
-  <!-- SKILLS, EXPERIENCE, CONTACT sections follow similar clean professional styling -->
-
-  <!-- FOOTER -->
-  <footer class="py-12 bg-black border-t border-slate-800">
-    <div class="max-w-7xl mx-auto px-6 text-center text-slate-500 text-sm">
-      <p>© 2026 Mohammadreza (Hamid) Matiny • Machine Learning Engineer</p>
+  <!-- SKILLS -->
+  <section id="skills" class="py-28 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 class="text-5xl heading-font font-bold text-center mb-16">Technical Skills</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-slate-800 p-8 rounded-3xl">
+          <h4 class="text-xl font-semibold mb-6 text-sky-400">Machine Learning</h4>
+          <ul class="space-y-3 text-slate-300">
+            <li>PyTorch • Hugging Face Transformers</li>
+            <li>YOLOv7/v8 • PointPillars • Sensor Fusion</li>
+            <li>Transformers • RNNs/LSTMs</li>
+          </ul>
+        </div>
+        <div class="bg-slate-800 p-8 rounded-3xl">
+          <h4 class="text-xl font-semibold mb-6 text-sky-400">MLOps & Production</h4>
+          <ul class="space-y-3 text-slate-300">
+            <li>Docker • FastAPI • MLflow</li>
+            <li>CI/CD • GitHub Actions</li>
+            <li>Cloud (GCP, AWS)</li>
+          </ul>
+        </div>
+        <div class="bg-slate-800 p-8 rounded-3xl">
+          <h4 class="text-xl font-semibold mb-6 text-sky-400">Other</h4>
+          <ul class="space-y-3 text-slate-300">
+            <li>Python (Expert) • SQL • Pandas</li>
+            <li>LiDAR / Camera / Radar Data</li>
+            <li>Performance Optimization</li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="py-28 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 class="text-5xl heading-font font-bold text-center mb-16">Experience</h2>
+      <!-- Torc, ReIAI, Saeidi entries here -->
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-28 bg-slate-900">
+    <div class="max-w-4xl mx-auto text-center px-8">
+      <h2 class="text-5xl heading-font font-bold mb-8">Let's Connect</h2>
+      <p class="text-2xl text-slate-400 mb-10">Open to Machine Learning Engineer & Data Scientist opportunities.</p>
+      <a href="mailto:hamidmatiny@gmail.com" class="inline-block px-12 py-6 bg-white text-slate-900 font-semibold text-xl rounded-3xl hover:bg-slate-200 transition-all">
+        hamidmatiny@gmail.com
+      </a>
+    </div>
+  </section>
+
+  <footer class="py-12 text-center text-slate-500 text-sm border-t border-slate-800">
+    © 2026 Mohammadreza (Hamid) Matiny
   </footer>
 
 </body>
