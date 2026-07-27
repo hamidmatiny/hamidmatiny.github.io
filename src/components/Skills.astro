@@ -1,0 +1,26 @@
+---
+import { skills } from '../data/site';
+---
+
+<section class="section" id="skills" aria-labelledby="skills-title">
+  <div class="wrap">
+    <p class="section-label">Skills &amp; stack</p>
+    <h2 class="section-title" id="skills-title">Where the work actually concentrates.</h2>
+    <p class="section-lead">Organized by the systems I ship — not an exhaustive badge wall.</p>
+
+    <div class="skills-grid">
+      {
+        skills.map((group) => (
+          <div class="skill-group reveal">
+            <h3>{group.category}</h3>
+            <ul class="skill-items">
+              {group.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

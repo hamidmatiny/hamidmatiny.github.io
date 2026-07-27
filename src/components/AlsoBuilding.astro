@@ -1,0 +1,22 @@
+---
+import { alsoBuilding } from '../data/site';
+---
+
+<section class="section" id="building" aria-labelledby="building-title">
+  <div class="wrap">
+    <p class="section-label">Also building</p>
+    <h2 class="section-title" id="building-title">Security, edge vision, geospatial.</h2>
+    <p class="section-lead">Active side systems — lighter treatment, same bar for accurate links.</p>
+
+    <div class="secondary-grid">
+      {
+        alsoBuilding.map((p) => (
+          <a class="secondary-item reveal" href={p.url} rel="noopener noreferrer" target="_blank">
+            <h3>{p.name}</h3>
+            <p>{p.blurb}</p>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

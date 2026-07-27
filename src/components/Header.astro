@@ -1,0 +1,58 @@
+---
+const links = [
+  { href: '#about', label: 'About' },
+  { href: '#work', label: 'Work' },
+  { href: '#building', label: 'Building' },
+  { href: '#skills', label: 'Stack' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="Hamid Matiny — home">
+      <span class="brand-mark">HM</span>
+      <span class="brand-name">Hamid Matiny</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="true" aria-label="Switch to light mode">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+          <circle class="theme-sun" cx="12" cy="12" r="3.5" />
+          <path class="theme-sun" d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.1 5.1l1.6 1.6M17.3 17.3l1.6 1.6M5.1 18.9l1.6-1.6M17.3 6.7l1.6-1.6" />
+          <path class="theme-moon" d="M18.5 13.2A6.7 6.7 0 0 1 10.8 5.5 6.8 6.8 0 1 0 18.5 13.2z" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="menu-toggle"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Open menu"
+      >
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="wrap mobile-nav" id="mobile-nav" data-mobile-nav>
+    <nav aria-label="Mobile">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+  </div>
+</header>
+
+<style>
+  :global([data-theme='dark']) .theme-sun {
+    display: none;
+  }
+  :global([data-theme='light']) .theme-moon {
+    display: none;
+  }
+</style>

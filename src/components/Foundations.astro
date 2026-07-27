@@ -1,0 +1,22 @@
+---
+import { foundations } from '../data/site';
+---
+
+<section class="section" id="foundations" aria-labelledby="foundations-title">
+  <div class="wrap">
+    <p class="section-label">Foundations</p>
+    <h2 class="section-title" id="foundations-title">Earlier systems that shaped the craft.</h2>
+    <p class="section-lead">Grouped briefly — perception, serving, telemetry, and API foundations.</p>
+
+    <div class="foundations-list reveal">
+      {
+        foundations.map((p) => (
+          <a class="foundation-row" href={p.url} rel="noopener noreferrer" target="_blank">
+            <span class="foundation-name">{p.name}</span>
+            <span class="foundation-blurb">{p.blurb}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

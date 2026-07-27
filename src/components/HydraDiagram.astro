@@ -1,0 +1,48 @@
+---
+---
+
+<svg class="diagram" viewBox="0 0 520 240" role="img" aria-labelledby="hydra-diagram-title hydra-diagram-desc">
+  <title id="hydra-diagram-title">hydra-data-factory architecture</title>
+  <desc id="hydra-diagram-desc">
+    Fleet JSON ingest through Pydantic and Pandera validation with DLQ isolation, then Parquet to S3 with Glue catalog, orchestrated by Airflow or Step Functions via Terraform.
+  </desc>
+  <defs>
+    <marker id="arrow-h" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" style="fill: var(--border-strong)"></path>
+    </marker>
+  </defs>
+
+  <rect class="node" x="20" y="36" width="110" height="48" rx="3"></rect>
+  <text class="label" x="75" y="57" text-anchor="middle">Fleet JSON</text>
+  <text class="sublabel" x="75" y="72" text-anchor="middle">ingest</text>
+
+  <path class="edge" d="M130 60 H156" style="marker-end: url(#arrow-h)"></path>
+
+  <rect class="node-accent" x="156" y="28" width="150" height="64" rx="3"></rect>
+  <text class="label" x="231" y="52" text-anchor="middle">Pydantic + Pandera</text>
+  <text class="sublabel" x="231" y="68" text-anchor="middle">contract gate</text>
+
+  <path class="edge" d="M231 92 V118" style="marker-end: url(#arrow-h)"></path>
+  <path class="edge" d="M306 60 H340" style="marker-end: url(#arrow-h)"></path>
+
+  <rect class="node" x="156" y="118" width="150" height="40" rx="3"></rect>
+  <text class="label" x="231" y="142" text-anchor="middle">DLQ isolation</text>
+
+  <rect class="node" x="340" y="36" width="160" height="48" rx="3"></rect>
+  <text class="label" x="420" y="57" text-anchor="middle">Parquet · Hive</text>
+  <text class="sublabel" x="420" y="72" text-anchor="middle">S3 + Glue</text>
+
+  <path class="edge" d="M420 84 V118" style="marker-end: url(#arrow-h)"></path>
+
+  <rect class="node" x="20" y="180" width="200" height="40" rx="3"></rect>
+  <text class="label" x="120" y="204" text-anchor="middle">Airflow + MLflow</text>
+
+  <rect class="node" x="240" y="180" width="140" height="40" rx="3"></rect>
+  <text class="label" x="310" y="204" text-anchor="middle">Step Functions</text>
+
+  <rect class="node" x="400" y="180" width="100" height="40" rx="3"></rect>
+  <text class="label" x="450" y="204" text-anchor="middle">Terraform</text>
+
+  <path class="edge" d="M120 180 V160 H420 V118"></path>
+  <path class="edge" d="M310 180 V160"></path>
+</svg>

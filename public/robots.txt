@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hamidmatiny.github.io/sitemap-index.xml

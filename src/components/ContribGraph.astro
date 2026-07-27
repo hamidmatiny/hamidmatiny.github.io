@@ -1,0 +1,73 @@
+---
+import contributions from '../data/contributions.json';
+
+const cells = Array.isArray(contributions.contributions) ? contributions.contributions : [];
+const recent = cells.slice(-182);
+const totalRecent = recent.reduce((sum, d) => sum + (d.count || 0), 0);
+const yearTotals = contributions.total ?? {};
+const yearSum = Object.values(yearTotals).reduce((a: number, b) => a + Number(b || 0), 0);
+
+const cols = 26;
+const rows = 7;
+const size = 10;
+const gap = 3;
+const width = cols * (size + gap);
+const height = rows * (size + gap);
+
+function levelFill(level: number) {
+  const map = [
+    'var(--border)',
+    'color-mix(in srgb, var(--accent) 28%, var(--bg-elevated))',
+    'color-mix(in srgb, var(--accent) 48%, var(--bg-elevated))',
+    'color-mix(in srgb, var(--accent) 72%, var(--bg-elevated))',
+    'var(--accent)',
+  ];
+  return map[Math.max(0, Math.min(4, level ?? 0))];
+}
+
+const grid = recent.map((d, i) => {
+  const col = Math.floor(i / rows);
+  const row = i % rows;
+  return {
+    ...d,
+    x: col * (size + gap),
+    y: row * (size + gap),
+  };
+});
+---
+
+{
+  recent.length === 0 ? (
+    <p style="margin:0;color:var(--text-muted);font-size:var(--text-sm)">
+      Contribution history loads at build time from GitHub.
+    </p>
+  ) : (
+    <>
+      <svg
+        class="contrib-graph"
+        viewBox={`0 0 ${width} ${height}`}
+        role="img"
+        aria-label={`GitHub contribution activity for the last ${recent.length} days. ${totalRecent} contributions in this window.`}
+      >
+        <title>Recent GitHub contributions</title>
+        {grid.map((cell) => (
+          <rect
+            class="contrib-cell"
+            x={cell.x}
+            y={cell.y}
+            width={size}
+            height={size}
+            rx="1.5"
+            fill={levelFill(cell.level)}
+          >
+            <title>{`${cell.date}: ${cell.count} contribution${cell.count === 1 ? '' : 's'}`}</title>
+          </rect>
+        ))}
+      </svg>
+      <div class="contrib-meta">
+        <span>{totalRecent} in last ~26 weeks</span>
+        <span>{yearSum || '—'} across tracked years</span>
+      </div>
+    </>
+  )
+}

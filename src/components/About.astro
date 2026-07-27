@@ -1,0 +1,44 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="section" id="about" aria-labelledby="about-title">
+  <div class="wrap">
+    <p class="section-label">About</p>
+    <h2 class="section-title" id="about-title">Platform engineering for models that have to ship.</h2>
+    <div class="about-grid">
+      <div class="prose reveal">
+        <p>
+          I’m Mohammadreza (“Hamid”) Matiny — an AI infrastructure and MLOps engineer with {site.yearsExperience}{' '}
+          years across deep learning systems, data pipelines, and cloud infrastructure on GCP and AWS. My work sits
+          where model code meets the platform: serving contracts, GPU scheduling, experiment provenance, and the
+          observability that makes production behavior trustworthy.
+        </p>
+        <p>
+          Today I build AI platform infrastructure — LLM serving, GPU orchestration, fleet telemetry — while also
+          working on agentic-AI security (policy-as-code gateways, tool-abuse controls, audit trails). At Torc Robotics
+          I contribute to the Data Quality Assurance ML Pipeline that keeps AV training data contract-clean before it
+          ever reaches a model.
+        </p>
+        <p>
+          I care about honest maturity signals: tagged releases when they’re real, architecture diagrams that match
+          the repo, and metrics that come from measured runs — not marketing copy.
+        </p>
+      </div>
+      <div class="about-stats reveal" role="list">
+        <div class="about-stat" role="listitem">
+          <strong>{site.yearsExperience} years</strong>
+          <span>Deep learning systems, data pipelines, and cloud infrastructure</span>
+        </div>
+        <div class="about-stat" role="listitem">
+          <strong>LLM platforms</strong>
+          <span>Multi-backend serving, GPU cost-safety in CI, tool-grounded advisors</span>
+        </div>
+        <div class="about-stat" role="listitem">
+          <strong>Production data</strong>
+          <span>Contract gates, lakehouses, streaming QA, and fleet observability</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

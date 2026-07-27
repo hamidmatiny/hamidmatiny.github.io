@@ -1,0 +1,205 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = `${site.shortName} · ${site.title}`, description = site.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname === '/' ? '' : Astro.url.pathname, site.url).toString().replace(/\/$/, '') || site.url;
+const ogImage = `${site.url}/og.png`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${site.url}/#person`,
+      name: 'Mohammadreza Matiny',
+      alternateName: ['Hamid Matiny', 'Mohammadreza "Hamid" Matiny'],
+      url: site.url,
+      email: site.email,
+      jobTitle: site.title,
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Torc Robotics',
+      },
+      sameAs: [site.github, site.linkedin],
+      knowsAbout: [
+        'LLM serving',
+        'GPU orchestration',
+        'MLOps',
+        'Production observability',
+        'AI infrastructure',
+      ],
+    },
+    {
+      '@type': 'ProfilePage',
+      '@id': `${site.url}/#profile`,
+      url: site.url,
+      name: title,
+      description,
+      mainEntity: { '@id': `${site.url}/#person` },
+      isPartOf: {
+        '@type': 'WebSite',
+        '@id': `${site.url}/#website`,
+        url: site.url,
+        name: `${site.shortName} Portfolio`,
+        publisher: { '@id': `${site.url}/#person` },
+      },
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      name: 'Vulcan',
+      description:
+        'Multi-backend LLM serving and GPU-orchestration platform unifying vLLM, Triton, Ray Serve, KServe, and BentoML.',
+      url: 'https://github.com/hamidmatiny/Vulcan',
+      codeRepository: 'https://github.com/hamidmatiny/Vulcan',
+      programmingLanguage: ['Python', 'TypeScript'],
+      author: { '@id': `${site.url}/#person` },
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      name: 'Argus',
+      description:
+        'Unified fleet telemetry, data-quality, MLOps, and observability platform with an AI copilot.',
+      url: 'https://github.com/hamidmatiny/Argus',
+      codeRepository: 'https://github.com/hamidmatiny/Argus',
+      author: { '@id': `${site.url}/#person` },
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      name: 'hydra-data-factory',
+      description:
+        'Production-validated AV telemetry lakehouse with contract validation and Terraform-provisioned AWS path.',
+      url: 'https://github.com/hamidmatiny/hydra-data-factory',
+      codeRepository: 'https://github.com/hamidmatiny/hydra-data-factory',
+      author: { '@id': `${site.url}/#person` },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.name} />
+    <meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4f2ec" media="(prefers-color-scheme: light)" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.shortName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${site.shortName} — ${site.title}`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (_) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+    <script>
+      function initTheme() {
+        const root = document.documentElement;
+        const buttons = document.querySelectorAll('[data-theme-toggle]');
+        const sync = () => {
+          const theme = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+          buttons.forEach((btn) => {
+            btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+            btn.setAttribute(
+              'aria-label',
+              theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+            );
+          });
+        };
+        buttons.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            root.setAttribute('data-theme', next);
+            try {
+              localStorage.setItem('theme', next);
+            } catch (_) {}
+            sync();
+          });
+        });
+        sync();
+      }
+
+      function initMenu() {
+        const toggle = document.querySelector('[data-menu-toggle]');
+        const panel = document.querySelector('[data-mobile-nav]');
+        if (!toggle || !panel) return;
+        toggle.addEventListener('click', () => {
+          const open = panel.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        panel.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            panel.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      function initReveal() {
+        const nodes = document.querySelectorAll('.reveal');
+        if (!nodes.length) return;
+        if (!('IntersectionObserver' in window)) {
+          nodes.forEach((n) => n.classList.add('is-visible'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+        );
+        nodes.forEach((n) => io.observe(n));
+      }
+
+      initTheme();
+      initMenu();
+      initReveal();
+    </script>
+  </body>
+</html>

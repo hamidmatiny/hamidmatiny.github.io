@@ -1,0 +1,83 @@
+---
+---
+
+<svg class="diagram" viewBox="0 0 520 420" role="img" aria-labelledby="vulcan-diagram-title vulcan-diagram-desc">
+  <title id="vulcan-diagram-title">Vulcan architecture</title>
+  <desc id="vulcan-diagram-desc">
+    Clients and LangGraph advisor connect to a gateway and model-serving contract, which fans out to BentoML, Ray Serve, Triton, vLLM, and KServe. Training, GPU infra, and observability feed the same system.
+  </desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" style="fill: var(--border-strong)"></path>
+    </marker>
+  </defs>
+
+  <rect class="node" x="20" y="24" width="110" height="44" rx="3"></rect>
+  <text class="label" x="75" y="43" text-anchor="middle">Clients</text>
+  <text class="sublabel" x="75" y="58" text-anchor="middle">console / API</text>
+
+  <rect class="node-accent" x="160" y="24" width="120" height="44" rx="3"></rect>
+  <text class="label" x="220" y="43" text-anchor="middle">Gateway</text>
+  <text class="sublabel" x="220" y="58" text-anchor="middle">routing :9007</text>
+
+  <rect class="node-accent" x="320" y="24" width="180" height="44" rx="3"></rect>
+  <text class="label" x="410" y="43" text-anchor="middle">Advisor · LangGraph</text>
+  <text class="sublabel" x="410" y="58" text-anchor="middle">tool-grounded only</text>
+
+  <path class="edge" d="M130 46 H160"></path>
+  <path class="edge" d="M280 46 H320"></path>
+  <path class="edge" d="M75 68 V100 H260 V120"></path>
+
+  <rect class="node-accent" x="160" y="120" width="200" height="52" rx="3"></rect>
+  <text class="label" x="260" y="142" text-anchor="middle">Model serving contract</text>
+  <text class="sublabel" x="260" y="158" text-anchor="middle">/health · /metrics · /v1/infer</text>
+
+  <path class="edge" d="M200 172 V198"></path>
+  <path class="edge" d="M230 172 V198"></path>
+  <path class="edge" d="M260 172 V198"></path>
+  <path class="edge" d="M290 172 V198"></path>
+  <path class="edge" d="M320 172 V198"></path>
+  <path class="edge" d="M200 172 H320"></path>
+
+  <rect class="node" x="28" y="198" width="84" height="40" rx="3"></rect>
+  <text class="label" x="70" y="222" text-anchor="middle">BentoML</text>
+
+  <rect class="node" x="122" y="198" width="84" height="40" rx="3"></rect>
+  <text class="label" x="164" y="222" text-anchor="middle">Ray Serve</text>
+
+  <rect class="node" x="216" y="198" width="84" height="40" rx="3"></rect>
+  <text class="label" x="258" y="216" text-anchor="middle">Triton</text>
+  <text class="sublabel" x="258" y="230" text-anchor="middle">+ TRT-LLM</text>
+
+  <rect class="node" x="310" y="198" width="84" height="40" rx="3"></rect>
+  <text class="label" x="352" y="216" text-anchor="middle">vLLM</text>
+  <text class="sublabel" x="352" y="230" text-anchor="middle">GPTQ/AWQ/FP8</text>
+
+  <rect class="node" x="404" y="198" width="84" height="40" rx="3"></rect>
+  <text class="label" x="446" y="222" text-anchor="middle">KServe</text>
+
+  <path class="edge" d="M70 238 V268 H180 V288"></path>
+  <path class="edge" d="M446 238 V268 H340 V288"></path>
+
+  <rect class="node" x="100" y="288" width="160" height="44" rx="3"></rect>
+  <text class="label" x="180" y="307" text-anchor="middle">Training contract</text>
+  <text class="sublabel" x="180" y="321" text-anchor="middle">Ray · FSDP · LoRA</text>
+
+  <rect class="node" x="280" y="288" width="160" height="44" rx="3"></rect>
+  <text class="label" x="360" y="307" text-anchor="middle">Tracking + DVC</text>
+  <text class="sublabel" x="360" y="321" text-anchor="middle">MLflow · W&amp;B</text>
+
+  <rect class="node" x="28" y="360" width="200" height="40" rx="3"></rect>
+  <text class="label" x="128" y="384" text-anchor="middle">GPU · Kueue/Karpenter/MIG</text>
+
+  <rect class="node" x="248" y="360" width="140" height="40" rx="3"></rect>
+  <text class="label" x="318" y="384" text-anchor="middle">Observability</text>
+
+  <rect class="node" x="408" y="360" width="84" height="40" rx="3"></rect>
+  <text class="label" x="450" y="378" text-anchor="middle">Managed</text>
+  <text class="sublabel" x="450" y="392" text-anchor="middle">SM · Bedrock</text>
+
+  <path class="edge" d="M180 332 V360"></path>
+  <path class="edge" d="M360 332 V360"></path>
+  <path class="edge" d="M410 46 V110 H480 V360"></path>
+</svg>

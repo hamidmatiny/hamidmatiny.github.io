@@ -1,0 +1,63 @@
+---
+---
+
+<svg class="diagram" viewBox="0 0 520 280" role="img" aria-labelledby="argus-diagram-title argus-diagram-desc">
+  <title id="argus-diagram-title">Argus pipeline architecture</title>
+  <desc id="argus-diagram-desc">
+    Streaming path from Kafka or Redpanda through Ray, Flink QA, Iceberg lakehouse, Dagster, drift monitor, incident engine, OpenTelemetry, dashboard, and AI copilot.
+  </desc>
+  <defs>
+    <marker id="arrow-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" style="fill: var(--border-strong)"></path>
+    </marker>
+  </defs>
+
+  <rect class="node" x="16" y="30" width="100" height="44" rx="3"></rect>
+  <text class="label" x="66" y="49" text-anchor="middle">Kafka</text>
+  <text class="sublabel" x="66" y="63" text-anchor="middle">/ Redpanda</text>
+
+  <path class="edge" d="M116 52 H140" style="marker-end: url(#arrow-a)"></path>
+
+  <rect class="node" x="140" y="30" width="72" height="44" rx="3"></rect>
+  <text class="label" x="176" y="56" text-anchor="middle">Ray</text>
+
+  <path class="edge" d="M212 52 H236" style="marker-end: url(#arrow-a)"></path>
+
+  <rect class="node-accent" x="236" y="30" width="100" height="44" rx="3"></rect>
+  <text class="label" x="286" y="49" text-anchor="middle">Flink QA</text>
+  <text class="sublabel" x="286" y="63" text-anchor="middle">gate</text>
+
+  <path class="edge" d="M336 52 H360" style="marker-end: url(#arrow-a)"></path>
+
+  <rect class="node" x="360" y="30" width="140" height="44" rx="3"></rect>
+  <text class="label" x="430" y="49" text-anchor="middle">Iceberg</text>
+  <text class="sublabel" x="430" y="63" text-anchor="middle">lakehouse</text>
+
+  <path class="edge" d="M430 74 V100" style="marker-end: url(#arrow-a)"></path>
+
+  <rect class="node" x="360" y="100" width="140" height="40" rx="3"></rect>
+  <text class="label" x="430" y="124" text-anchor="middle">Dagster</text>
+
+  <path class="edge" d="M360 120 H286 V150" style="marker-end: url(#arrow-a)"></path>
+
+  <rect class="node" x="216" y="150" width="140" height="40" rx="3"></rect>
+  <text class="label" x="286" y="174" text-anchor="middle">Drift monitor</text>
+
+  <path class="edge" d="M216 170 H156 V200" style="marker-end: url(#arrow-a)"></path>
+
+  <rect class="node-accent" x="56" y="200" width="160" height="40" rx="3"></rect>
+  <text class="label" x="136" y="224" text-anchor="middle">Incident engine · OPA</text>
+
+  <path class="edge" d="M216 220 H260" style="marker-end: url(#arrow-a)"></path>
+
+  <rect class="node" x="260" y="200" width="120" height="40" rx="3"></rect>
+  <text class="label" x="320" y="224" text-anchor="middle">OpenTelemetry</text>
+
+  <path class="edge" d="M380 220 H404" style="marker-end: url(#arrow-a)"></path>
+
+  <rect class="node" x="404" y="190" width="100" height="28" rx="3"></rect>
+  <text class="label" x="454" y="209" text-anchor="middle">Dashboard</text>
+
+  <rect class="node" x="404" y="228" width="100" height="28" rx="3"></rect>
+  <text class="label" x="454" y="247" text-anchor="middle">AI copilot</text>
+</svg>
