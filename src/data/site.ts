@@ -11,7 +11,7 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/mohammadreza-matiny-46812121a',
   roleNote: 'Shipping AI infrastructure and data platforms across 30 public repositories.',
   location: 'Available globally · open to remote',
-  yearsExperience: '~6',
+  yearsExperience: '12',
 } as const;
 
 export type FeaturedProject = {
@@ -33,7 +33,7 @@ export const featured: FeaturedProject[] = [
     tagline:
       'Multi-backend LLM serving and GPU-orchestration platform — one contract across vLLM, Triton, Ray Serve, KServe, and BentoML.',
     status:
-      'Tagged v1.0.0 at phase-15. Main has since completed phases 16–22 (advisor, training, LoRA/PEFT, DVC, tracking) — CHANGELOG records 1.2.0; no v1.1.0/v1.2.0 Git tag yet.',
+      'Tagged v1.2.0 across 22 phases: advanced GPU serving (GPTQ/AWQ/FP8, TensorRT-LLM templates), cost-per-token tracking, training backends, LoRA/PEFT, DVC exports, pluggable MLflow/W&B tracking, and a tool-grounded LangGraph advisor with non-fabrication CI.',
     statusTone: 'live',
     url: 'https://github.com/hamidmatiny/Vulcan',
     architecture:
