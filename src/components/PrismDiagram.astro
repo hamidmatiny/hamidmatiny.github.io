@@ -1,0 +1,60 @@
+---
+---
+
+<svg class="diagram" viewBox="0 0 520 320" role="img" aria-labelledby="prism-diagram-title prism-diagram-desc">
+  <title id="prism-diagram-title">PRISM architecture</title>
+  <desc id="prism-diagram-desc">
+    Fleet ingest into a bronze zone, splitting into an OpenCV/ONNX CV service with human review and a PySpark lakehouse with dbt gold models, both feeding a control plane and activation gateway that serve Redshift, Snowflake, a digital-twin cockpit, and an AI copilot.
+  </desc>
+  <defs>
+    <marker id="arrow-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" style="fill: var(--border-strong)"></path>
+    </marker>
+  </defs>
+
+  <rect class="node" x="16" y="30" width="100" height="44" rx="3"></rect>
+  <text class="label" x="66" y="56" text-anchor="middle">Fleet ingest</text>
+
+  <path class="edge" d="M116 52 H140" style="marker-end: url(#arrow-p)"></path>
+
+  <rect class="node" x="140" y="30" width="100" height="44" rx="3"></rect>
+  <text class="label" x="190" y="56" text-anchor="middle">Bronze zone</text>
+
+  <path class="edge" d="M190 74 V92 H96 V104" style="marker-end: url(#arrow-p)"></path>
+  <path class="edge" d="M190 74 V92 H280 V104" style="marker-end: url(#arrow-p)"></path>
+
+  <rect class="node-accent" x="16" y="104" width="160" height="48" rx="3"></rect>
+  <text class="label" x="96" y="124" text-anchor="middle">CV service</text>
+  <text class="sublabel" x="96" y="140" text-anchor="middle">OpenCV + ONNX/YOLO</text>
+
+  <rect class="node" x="200" y="104" width="160" height="48" rx="3"></rect>
+  <text class="label" x="280" y="124" text-anchor="middle">PySpark lakehouse</text>
+  <text class="sublabel" x="280" y="140" text-anchor="middle">bronze → silver → gold</text>
+
+  <path class="edge" d="M96 152 V182" style="marker-end: url(#arrow-p)"></path>
+  <path class="edge" d="M280 152 V182" style="marker-end: url(#arrow-p)"></path>
+
+  <rect class="node" x="16" y="182" width="160" height="40" rx="3"></rect>
+  <text class="label" x="96" y="206" text-anchor="middle">Review queue</text>
+
+  <rect class="node" x="200" y="182" width="160" height="40" rx="3"></rect>
+  <text class="label" x="280" y="206" text-anchor="middle">Gold · dbt models</text>
+
+  <path class="edge" d="M96 222 V252" style="marker-end: url(#arrow-p)"></path>
+  <path class="edge" d="M280 222 V252" style="marker-end: url(#arrow-p)"></path>
+
+  <rect class="node-accent" x="16" y="252" width="160" height="40" rx="3"></rect>
+  <text class="label" x="96" y="272" text-anchor="middle">Control plane</text>
+  <text class="sublabel" x="96" y="286" text-anchor="middle">Django + RBAC</text>
+
+  <rect class="node-accent" x="200" y="252" width="160" height="40" rx="3"></rect>
+  <text class="label" x="280" y="272" text-anchor="middle">Activation gateway</text>
+  <text class="sublabel" x="280" y="286" text-anchor="middle">→ Redshift + Snowflake</text>
+
+  <path class="edge" d="M176 272 H384" style="marker-end: url(#arrow-p)"></path>
+  <path class="edge" d="M360 272 H384" style="marker-end: url(#arrow-p)"></path>
+
+  <rect class="node" x="384" y="247" width="120" height="50" rx="3"></rect>
+  <text class="label" x="444" y="268" text-anchor="middle">Cockpit</text>
+  <text class="sublabel" x="444" y="284" text-anchor="middle">+ AI copilot</text>
+</svg>

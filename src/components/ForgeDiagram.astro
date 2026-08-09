@@ -1,0 +1,66 @@
+---
+---
+
+<svg class="diagram" viewBox="0 0 520 380" role="img" aria-labelledby="forge-diagram-title forge-diagram-desc">
+  <title id="forge-diagram-title">FORGE architecture</title>
+  <desc id="forge-diagram-desc">
+    Local pipeline from ingest through 2D and 3D detection, tracking, sensor fusion, active-learning labeling, then evaluation, curation, and visualization. A parallel cloud infrastructure path is Terraform-verified but never deployed against live AWS.
+  </desc>
+  <defs>
+    <marker id="arrow-f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" style="fill: var(--border-strong)"></path>
+    </marker>
+  </defs>
+
+  <rect class="node" x="16" y="30" width="110" height="44" rx="3"></rect>
+  <text class="label" x="71" y="56" text-anchor="middle">nuScenes → Parquet</text>
+
+  <path class="edge" d="M71 74 V92 H91 V104" style="marker-end: url(#arrow-f)"></path>
+  <path class="edge" d="M71 74 V92 H285 V104" style="marker-end: url(#arrow-f)"></path>
+  <path class="edge" d="M126 52 H380" stroke-dasharray="4 3" style="marker-end: url(#arrow-f)"></path>
+
+  <rect class="node" x="380" y="30" width="124" height="60" rx="3"></rect>
+  <text class="label" x="442" y="54" text-anchor="middle">Cloud infra</text>
+  <text class="sublabel" x="442" y="70" text-anchor="middle">Terraform · verified,</text>
+  <text class="sublabel" x="442" y="82" text-anchor="middle">never applied</text>
+
+  <rect class="node" x="16" y="104" width="150" height="44" rx="3"></rect>
+  <text class="label" x="91" y="122" text-anchor="middle">detect2d</text>
+  <text class="sublabel" x="91" y="137" text-anchor="middle">Faster R-CNN</text>
+
+  <rect class="node" x="210" y="104" width="150" height="44" rx="3"></rect>
+  <text class="label" x="285" y="122" text-anchor="middle">detect3d</text>
+  <text class="sublabel" x="285" y="137" text-anchor="middle">PointNet-style</text>
+
+  <path class="edge" d="M91 148 V182" style="marker-end: url(#arrow-f)"></path>
+  <path class="edge" d="M91 148 V165 H285 V182" style="marker-end: url(#arrow-f)"></path>
+  <path class="edge" d="M285 148 V182" style="marker-end: url(#arrow-f)"></path>
+
+  <rect class="node" x="16" y="182" width="130" height="40" rx="3"></rect>
+  <text class="label" x="81" y="200" text-anchor="middle">track</text>
+  <text class="sublabel" x="81" y="215" text-anchor="middle">SORT: Kalman + IoU</text>
+
+  <rect class="node-accent" x="210" y="182" width="150" height="40" rx="3"></rect>
+  <text class="label" x="285" y="200" text-anchor="middle">fuse</text>
+  <text class="sublabel" x="285" y="215" text-anchor="middle">calibrated projection</text>
+
+  <path class="edge" d="M81 222 V235 H215 V252" style="marker-end: url(#arrow-f)"></path>
+  <path class="edge" d="M285 222 V235 H215 V252" style="marker-end: url(#arrow-f)"></path>
+
+  <rect class="node-accent" x="140" y="252" width="150" height="40" rx="3"></rect>
+  <text class="label" x="215" y="270" text-anchor="middle">label</text>
+  <text class="sublabel" x="215" y="285" text-anchor="middle">trust scoring + active learning</text>
+
+  <path class="edge" d="M215 292 V307 H86 V322" style="marker-end: url(#arrow-f)"></path>
+  <path class="edge" d="M215 292 V307 H242 V322" style="marker-end: url(#arrow-f)"></path>
+  <path class="edge" d="M215 292 V307 H398 V322" style="marker-end: url(#arrow-f)"></path>
+
+  <rect class="node" x="16" y="322" width="140" height="36" rx="3"></rect>
+  <text class="label" x="86" y="344" text-anchor="middle">evaluate · mAP vs GT</text>
+
+  <rect class="node" x="172" y="322" width="140" height="36" rx="3"></rect>
+  <text class="label" x="242" y="344" text-anchor="middle">curate · LanceDB dedup</text>
+
+  <rect class="node" x="328" y="322" width="140" height="36" rx="3"></rect>
+  <text class="label" x="398" y="344" text-anchor="middle">visualize · rerun/MCAP</text>
+</svg>

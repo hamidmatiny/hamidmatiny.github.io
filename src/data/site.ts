@@ -101,21 +101,66 @@ export const featured: FeaturedProject[] = [
     id: 'prism',
     name: 'PRISM',
     tagline:
-      'Multi-warehouse fleet-intelligence platform — camera/sensor ingest, a Databricks-style lakehouse with dbt gold models, and OpenCV/ONNX defect detection with human review.',
+      'Multi-warehouse fleet-intelligence platform — camera/sensor ingest, a PySpark lakehouse with dbt gold models, and OpenCV/ONNX defect detection with human review.',
     status:
-      'The largest repo in the portfolio by service count — 10+ services (cv-service, ingestion, lakehouse, orchestration, activation-gateway, drift-monitor, incident-engine, ai-copilot, control-plane, scenario-engine, cockpit). Actively developed; no tagged release yet.',
-    statusTone: 'building',
+      'Tagged v1.2.0 — all 20 phases (0–19) complete, including a golden-path chaos e2e test against the live Compose stack. 17-service Docker Compose stack, 19 test files, 2 CI workflows (lint/test, Terraform validate + release packaging).',
+    statusTone: 'live',
     url: 'https://github.com/hamidmatiny/PRISM',
     architecture:
-      'Camera/sensor ingest feeds a genuine PySpark lakehouse (bronze → silver → gold, UC-gated expectations) that mirrors to Azure ADLS Gen2 via a real Databricks notebook job for disaster recovery, with dbt building staging and gold fact/dim models on top. OpenCV/ONNX defect detection routes low-confidence calls to human review; per-asset circuit breakers isolate faulty sensors; a tool-grounded AI copilot sits over the control plane and scenario engine, surfaced through a Vue cockpit for operators.',
+      'Camera/sensor ingest lands in a bronze zone, then splits: a PySpark medallion lakehouse (bronze → silver → gold, dbt-modeled) on one side, an OpenCV/ONNX YOLO-family CV service on the other, routing low-confidence findings to a Django control-plane review queue. Gold data fans out through one activation contract to both Redshift and Snowflake, mirrors to Azure Databricks/ADLS for DR, and feeds a Vue 3 + Three.js digital-twin cockpit. An incident-engine runs per-asset circuit breakers on OPA/Rego trip policies; Dagster orchestrates the lakehouse and drift-monitor; a tool-grounded AI copilot answers only from evidence it can cite.',
     decisions: [
-      'Databricks-style lakehouse with real PySpark transforms and a provisioned Azure Databricks workspace, not just files on disk',
-      'dbt gold models on top of the lakehouse for analytics-ready fact/dim tables',
-      'Cross-cloud DR: Databricks notebook jobs mirror the AWS lakehouse into Azure ADLS Gen2',
-      'Per-asset circuit breakers isolate a failing sensor instead of failing the whole pipeline',
-      'Human-in-the-loop review gate for low-confidence defect detections',
+      'Two-layer Pydantic → Pandera validation gate before any bronze promotion',
+      'Per-asset circuit breakers driven by OPA/Rego trip policies, not hardcoded thresholds',
+      'Drift-monitor baselines never build from synthetic scenario data — health stays non-ready until a real baseline earns it',
+      'Copilot is tool-grounded — every answer must cite real evidence (ADR-004)',
+      'Cloud paths (AWS + Azure Terraform) are plan/validate/checkov-only in CI; human apply only (ADR-001)',
     ],
-    stack: ['PySpark', 'Databricks', 'dbt', 'OpenCV', 'ONNX', 'Django', 'Vue', 'Terraform', 'Snowflake', 'Docker'],
+    stack: [
+      'PySpark',
+      'Databricks',
+      'dbt',
+      'OpenCV',
+      'ONNX / YOLO',
+      'Django',
+      'Vue 3 + Three.js',
+      'OPA / Rego',
+      'Dagster',
+      'Terraform',
+      'Snowflake',
+      'Redshift',
+    ],
+  },
+  {
+    id: 'forge',
+    name: 'FORGE',
+    tagline:
+      'Offline AV perception & auto-labeling platform — 2D/3D detection, tracking, sensor fusion, and active-learning pseudo-labeling over a versioned Parquet data lake.',
+    status:
+      'Tagged v0.2.0 — all 11 phases complete (ingest through visualize plus productionization). 15 test files, 2 CI workflows. Detection heads are randomly initialized research baselines, not trained on real labels — documented honestly in KNOWN_GAPS.md rather than overclaimed.',
+    statusTone: 'live',
+    url: 'https://github.com/hamidmatiny/FORGE',
+    architecture:
+      'The forge CLI runs an 8-stage pipeline end to end locally: ingest (nuScenes → Parquet lake, DVC, Hydra configs) → detect2d (Faster R-CNN) and detect3d (PointNet-style) → track (SORT: Kalman + Hungarian IoU) → fuse (calibrated projection + IoU) → label (trust scoring + active learning) → evaluate (BEV distance, mAP against held-out ground truth) → curate (LanceDB dedup) → visualize (rerun.io / Foxglove MCAP). A parallel cloud path — S3 → Lambda → SQS → DynamoDB → EventBridge → Step Functions → ECS Fargate → Glue (11 tables) → Athena — is Terraform-defined and structurally verified in CI, but intentionally never applied against live AWS.',
+    decisions: [
+      'Ground-truth labels used only for evaluation, never as a pipeline input — no label leakage',
+      'Every pipeline stage round-trips through a versioned Parquet lake instead of ad hoc intermediate files',
+      'Cloud orchestration built and CI-verified as code, deliberately never deployed — same cost-safety policy as Vulcan, PRISM, and hydra-data-factory',
+      'Ray distributed execution wired for the two heaviest stages (detect2d/detect3d); the rest run local by design',
+      'Random-init detectors are labeled as smoke-tested baselines, not tuned models — no inflated accuracy claims',
+    ],
+    stack: [
+      'PyTorch Lightning',
+      'Faster R-CNN',
+      'SORT',
+      'Ray',
+      'LanceDB',
+      'MLflow',
+      'W&B',
+      'DVC',
+      'Hydra',
+      'Terraform',
+      'Parquet',
+    ],
   },
   {
     id: 'hydra',
@@ -156,12 +201,6 @@ export type SecondaryProject = {
 };
 
 export const alsoBuilding: SecondaryProject[] = [
-  {
-    name: 'FORGE',
-    blurb:
-      'Offline AV perception & auto-labeling platform — 2D/3D detection, tracking, sensor fusion, and active-learning pseudo-labeling, with every stage table round-tripping through a Parquet data lake. An 11-table cloud path (S3 → Lambda → SQS → DynamoDB → EventBridge → Step Functions → ECS Fargate → Glue → Athena) is Terraform-defined and CI-verified, not yet applied against live AWS.',
-    url: 'https://github.com/hamidmatiny/FORGE',
-  },
   {
     name: 'aegis',
     blurb:

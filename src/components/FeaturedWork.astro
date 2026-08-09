@@ -2,11 +2,15 @@
 import { featured } from '../data/site';
 import VulcanDiagram from './VulcanDiagram.astro';
 import ArgusDiagram from './ArgusDiagram.astro';
+import PrismDiagram from './PrismDiagram.astro';
+import ForgeDiagram from './ForgeDiagram.astro';
 import HydraDiagram from './HydraDiagram.astro';
 
 const diagrams: Record<string, any> = {
   vulcan: VulcanDiagram,
   argus: ArgusDiagram,
+  prism: PrismDiagram,
+  forge: ForgeDiagram,
   hydra: HydraDiagram,
 };
 ---
