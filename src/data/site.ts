@@ -3,13 +3,13 @@ export const site = {
   shortName: 'Hamid Matiny',
   title: 'AI Infrastructure & MLOps Engineer',
   description:
-    'AI Infrastructure & MLOps Engineer specializing in LLM serving, GPU orchestration, and production observability. Building platforms for reliable model serving at scale.',
+    'AI Infrastructure & MLOps Engineer specializing in LLM serving, GPU orchestration, and production observability. 30 public repositories spanning LLM infra, data engineering, and computer vision.',
   url: 'https://hamidmatiny.github.io',
   email: 'hamidmatiny@gmail.com',
   github: 'https://github.com/hamidmatiny',
   githubUser: 'hamidmatiny',
   linkedin: 'https://www.linkedin.com/in/mohammadreza-matiny-46812121a',
-  roleNote: 'Torc Robotics · Data Quality Assurance ML Pipeline',
+  roleNote: 'Shipping AI infrastructure and data platforms across 30 public repositories.',
   location: 'Available globally · open to remote',
   yearsExperience: '~6',
 } as const;
@@ -67,19 +67,19 @@ export const featured: FeaturedProject[] = [
     id: 'argus',
     name: 'Argus',
     tagline:
-      "Vulcan's sibling — unified fleet telemetry, data-quality, MLOps, and observability with an AI copilot.",
+      "Production-shaped fleet telemetry platform — Kafka/Ray/Flink ingest, Iceberg + Dagster lakehouse, drift detection, OPA-backed incidents, and a read-only AI copilot.",
     status:
-      'Architecture / early-build phase. Pipeline topology and contracts are defined; not a finished production system yet.',
-    statusTone: 'building',
+      "Tagged v1.0.0 — CHANGELOG calls it the first production-shaped release (Phases 0–15). 45 Docker Compose services, 41 test files (including Kafka integration tests), and 6 active CI workflows (ci, docker-build, semgrep, e2e-nightly, load-nightly, chaos-nightly).",
+    statusTone: 'live',
     url: 'https://github.com/hamidmatiny/Argus',
     architecture:
-      'Kafka/Redpanda ingest → Ray processing → Flink QA gate → Iceberg lakehouse → Dagster orchestration → drift-monitor → OPA-backed incident engine → OpenTelemetry → dashboard, plus a read-only AI copilot. Same containers run via Docker Compose locally or Terraform/Helm/Argo CD on EKS.',
+      'Redpanda/MSK → Ray ingest → stream-processor QA gate (Flink option) → Iceberg + Trino lakehouse → Dagster/MLflow orchestration → drift-monitor (KS tests, embeddings, Evidently) → OPA-backed incident-engine (circuit breakers) → api-gateway (OIDC/Keycloak, OPA RBAC) → Next.js dashboard, plus a read-only Qdrant-RAG AI copilot with its own eval harness. Same container images run via Docker Compose locally or Terraform + Helm (one chart per service) + Argo CD app-of-apps on EKS.',
     decisions: [
-      'Contract-first streaming path with an explicit Flink QA gate before lakehouse writes',
+      'Contract-first streaming path with an explicit QA gate before lakehouse writes',
       'Iceberg + Dagster for reproducible lakehouse materialization',
       'OPA policy for incident decisions — not prompt-only automation',
-      'Copilot is read-only against telemetry and runbooks',
-      'One image set for local Compose and EKS GitOps',
+      'Copilot is read-only against telemetry and runbooks, backed by an eval harness',
+      'Documented scope cuts (KNOWN_GAPS.md) instead of overclaiming — no service mesh/mTLS, Vault-backed secrets, or column-level lineage yet',
     ],
     stack: [
       'Kafka',
@@ -87,12 +87,35 @@ export const featured: FeaturedProject[] = [
       'Ray',
       'Flink',
       'Iceberg',
+      'Trino',
       'Dagster',
       'OpenTelemetry',
       'OPA',
       'Argo CD',
       'Terraform',
+      'Next.js',
+      'Qdrant',
     ],
+  },
+  {
+    id: 'prism',
+    name: 'PRISM',
+    tagline:
+      'Multi-warehouse fleet-intelligence platform — camera/sensor ingest, a Databricks-style lakehouse with dbt gold models, and OpenCV/ONNX defect detection with human review.',
+    status:
+      'The largest repo in the portfolio by service count — 10+ services (cv-service, ingestion, lakehouse, orchestration, activation-gateway, drift-monitor, incident-engine, ai-copilot, control-plane, scenario-engine, cockpit). Actively developed; no tagged release yet.',
+    statusTone: 'building',
+    url: 'https://github.com/hamidmatiny/PRISM',
+    architecture:
+      'Camera/sensor ingest feeds a genuine PySpark lakehouse (bronze → silver → gold, UC-gated expectations) that mirrors to Azure ADLS Gen2 via a real Databricks notebook job for disaster recovery, with dbt building staging and gold fact/dim models on top. OpenCV/ONNX defect detection routes low-confidence calls to human review; per-asset circuit breakers isolate faulty sensors; a tool-grounded AI copilot sits over the control plane and scenario engine, surfaced through a Vue cockpit for operators.',
+    decisions: [
+      'Databricks-style lakehouse with real PySpark transforms and a provisioned Azure Databricks workspace, not just files on disk',
+      'dbt gold models on top of the lakehouse for analytics-ready fact/dim tables',
+      'Cross-cloud DR: Databricks notebook jobs mirror the AWS lakehouse into Azure ADLS Gen2',
+      'Per-asset circuit breakers isolate a failing sensor instead of failing the whole pipeline',
+      'Human-in-the-loop review gate for low-confidence defect detections',
+    ],
+    stack: ['PySpark', 'Databricks', 'dbt', 'OpenCV', 'ONNX', 'Django', 'Vue', 'Terraform', 'Snowflake', 'Docker'],
   },
   {
     id: 'hydra',
@@ -133,6 +156,12 @@ export type SecondaryProject = {
 };
 
 export const alsoBuilding: SecondaryProject[] = [
+  {
+    name: 'FORGE',
+    blurb:
+      'Offline AV perception & auto-labeling platform — 2D/3D detection, tracking, sensor fusion, and active-learning pseudo-labeling, with every stage table round-tripping through a Parquet data lake. An 11-table cloud path (S3 → Lambda → SQS → DynamoDB → EventBridge → Step Functions → ECS Fargate → Glue → Athena) is Terraform-defined and CI-verified, not yet applied against live AWS.',
+    url: 'https://github.com/hamidmatiny/FORGE',
+  },
   {
     name: 'aegis',
     blurb:
@@ -274,6 +303,19 @@ export const skills: SkillGroup[] = [
     ],
   },
   {
+    category: 'Computer Vision & Perception',
+    items: [
+      'OpenCV',
+      'ONNX',
+      'YOLO / ByteTrack',
+      '2D/3D detection & tracking',
+      'Sensor fusion (radar / LiDAR / camera)',
+      'PyTorch',
+      'Active learning / pseudo-labeling',
+      'Edge AI',
+    ],
+  },
+  {
     category: 'Data & Streaming Systems',
     items: [
       'Kafka / Redpanda',
@@ -285,6 +327,8 @@ export const skills: SkillGroup[] = [
       'Airflow',
       'Step Functions',
       'Ray',
+      'PySpark / Databricks',
+      'dbt',
     ],
   },
   {

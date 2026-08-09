@@ -61,8 +61,12 @@ const diagrams: Record<string, any> = {
             </div>
 
             <div class="diagram-wrap">
-              <h4 class="case-block-title">System shape</h4>
-              {Diagram && <Diagram />}
+              {Diagram && (
+                <>
+                  <h4 class="case-block-title">System shape</h4>
+                  <Diagram />
+                </>
+              )}
               <p style="margin: var(--space-3) 0 0; font-size: var(--text-xs); color: var(--text-faint);">
                 <a href={project.url} rel="noopener noreferrer" target="_blank">
                   View repository →

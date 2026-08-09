@@ -22,10 +22,6 @@ const jsonLd = {
       url: site.url,
       email: site.email,
       jobTitle: site.title,
-      worksFor: {
-        '@type': 'Organization',
-        name: 'Torc Robotics',
-      },
       sameAs: [site.github, site.linkedin],
       knowsAbout: [
         'LLM serving',
@@ -33,6 +29,8 @@ const jsonLd = {
         'MLOps',
         'Production observability',
         'AI infrastructure',
+        'Computer vision',
+        'Data engineering',
       ],
     },
     {
@@ -76,6 +74,24 @@ const jsonLd = {
         'Production-validated AV telemetry lakehouse with contract validation and Terraform-provisioned AWS path.',
       url: 'https://github.com/hamidmatiny/hydra-data-factory',
       codeRepository: 'https://github.com/hamidmatiny/hydra-data-factory',
+      author: { '@id': `${site.url}/#person` },
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      name: 'PRISM',
+      description:
+        'Multi-warehouse fleet-intelligence platform with a Databricks-style lakehouse, dbt gold models, and OpenCV/ONNX defect detection.',
+      url: 'https://github.com/hamidmatiny/PRISM',
+      codeRepository: 'https://github.com/hamidmatiny/PRISM',
+      author: { '@id': `${site.url}/#person` },
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      name: 'FORGE',
+      description:
+        'Offline AV perception and auto-labeling platform for 2D/3D detection, tracking, and sensor fusion.',
+      url: 'https://github.com/hamidmatiny/FORGE',
+      codeRepository: 'https://github.com/hamidmatiny/FORGE',
       author: { '@id': `${site.url}/#person` },
     },
   ],
