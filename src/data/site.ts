@@ -163,6 +163,37 @@ export const featured: FeaturedProject[] = [
     ],
   },
   {
+    id: 'aegis',
+    name: 'aegis',
+    tagline:
+      'AI-native defense-in-depth gateway for LLM apps and agents — prompt injection, data exfiltration, and tool/MCP abuse, with a tamper-evident audit trail.',
+    status:
+      'Tagged v0.3.1 — all 12 build-order stages complete. 11-service Docker Compose stack, 53 test files, 3 CI workflows (ci, release, security). Publishes its own adaptive red-team result instead of a vendor catch-rate demo: real-model hardening cuts round-1 bypass rate (10.8% → 9.2%) but overall bypass rate under sustained adaptive attack stays flat at ~48%.',
+    statusTone: 'live',
+    url: 'https://github.com/hamidmatiny/aegis',
+    architecture:
+      'A Go gateway fronts the defended chat pipeline: requests pass through Python input-defense detectors, a Go policy-engine evaluating CEL policy packs, and a provider-agnostic Go model-router, then Python output-defense detectors (plus an LLM judge) before any response is released. A separate agent-gate (Go) enforces tool/MCP call permissions with taint tracking. Every enforcement decision is Ed25519-signed into a Postgres-backed audit trail. A continuous red-team engine runs adaptive campaigns directly against input/output defense — deliberately bypassing policy-engine — and publishes bypass-rate evidence to a React/TS dashboard.',
+    decisions: [
+      'Security decisions fail closed (gateway/policy-engine/agent-gate outage returns 502, never releases an unchecked response) — only observability fails open, documented explicitly in FAILURE_MODES.md',
+      'No static default credentials anywhere in the repo — dashboard and gateway keys are generated at container startup or via a credential script',
+      'Publishes its own adaptive red-team bypass rates honestly, including the unflattering result that hardening barely moves sustained bypass rate — continuous monitoring over a one-time "solved" claim',
+      'Red-team probes input/output defense directly, deliberately bypassing policy-engine, to measure detector effectiveness in isolation',
+      'Tamper-evident audit trail via Ed25519-signed receipts, not plain logs',
+    ],
+    stack: [
+      'Go',
+      'Python',
+      'TypeScript',
+      'CEL policy-as-code',
+      'Prompt-Guard',
+      'Toxic-BERT',
+      'spaCy NER',
+      'PostgreSQL',
+      'Redis',
+      'React',
+    ],
+  },
+  {
     id: 'hydra',
     name: 'hydra-data-factory',
     tagline:
@@ -201,12 +232,6 @@ export type SecondaryProject = {
 };
 
 export const alsoBuilding: SecondaryProject[] = [
-  {
-    name: 'aegis',
-    blurb:
-      'LLM/agent security gateway — prompt-injection defense, policy-as-code, tamper-evident audit trails, human approval for high-risk actions.',
-    url: 'https://github.com/hamidmatiny/aegis',
-  },
   {
     name: 'AegisFlow',
     blurb:

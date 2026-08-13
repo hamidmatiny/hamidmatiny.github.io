@@ -1,0 +1,70 @@
+---
+---
+
+<svg class="diagram" viewBox="0 0 580 320" role="img" aria-labelledby="aegis-diagram-title aegis-diagram-desc">
+  <title id="aegis-diagram-title">aegis architecture</title>
+  <desc id="aegis-diagram-desc">
+    A Go gateway routes requests through input defense, a CEL policy engine, and a model router before output defense releases a response. A parallel agent-gate enforces tool permissions. Every decision is signed into an audit trail shown on a dashboard, while a red-team engine continuously probes input and output defense directly.
+  </desc>
+  <defs>
+    <marker id="arrow-ae" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" style="fill: var(--border-strong)"></path>
+    </marker>
+  </defs>
+
+  <rect class="node" x="16" y="30" width="100" height="44" rx="3"></rect>
+  <text class="label" x="66" y="56" text-anchor="middle">App / SDK</text>
+
+  <path class="edge" d="M116 52 H140" style="marker-end: url(#arrow-ae)"></path>
+
+  <rect class="node-accent" x="140" y="30" width="110" height="44" rx="3"></rect>
+  <text class="label" x="195" y="56" text-anchor="middle">Gateway (Go)</text>
+
+  <path class="edge" d="M195 74 V92 H81 V104" style="marker-end: url(#arrow-ae)"></path>
+  <path class="edge" d="M250 52 H509 V104" stroke-dasharray="4 3" style="marker-end: url(#arrow-ae)"></path>
+
+  <rect class="node" x="16" y="104" width="130" height="44" rx="3"></rect>
+  <text class="label" x="81" y="124" text-anchor="middle">Input defense</text>
+  <text class="sublabel" x="81" y="140" text-anchor="middle">Python detectors</text>
+
+  <path class="edge" d="M146 126 H162" style="marker-end: url(#arrow-ae)"></path>
+
+  <rect class="node-accent" x="162" y="104" width="130" height="44" rx="3"></rect>
+  <text class="label" x="227" y="124" text-anchor="middle">Policy engine</text>
+  <text class="sublabel" x="227" y="140" text-anchor="middle">Go + CEL</text>
+
+  <path class="edge" d="M292 126 H308" style="marker-end: url(#arrow-ae)"></path>
+
+  <rect class="node" x="308" y="104" width="130" height="44" rx="3"></rect>
+  <text class="label" x="373" y="124" text-anchor="middle">Model router</text>
+  <text class="sublabel" x="373" y="140" text-anchor="middle">provider-agnostic</text>
+
+  <rect class="node-accent" x="454" y="104" width="110" height="44" rx="3"></rect>
+  <text class="label" x="509" y="124" text-anchor="middle">Agent-gate</text>
+  <text class="sublabel" x="509" y="140" text-anchor="middle">tool / MCP taint</text>
+
+  <path class="edge" d="M373 148 V165 H227 V182" style="marker-end: url(#arrow-ae)"></path>
+
+  <rect class="node-accent" x="162" y="182" width="130" height="44" rx="3"></rect>
+  <text class="label" x="227" y="202" text-anchor="middle">Output defense</text>
+  <text class="sublabel" x="227" y="218" text-anchor="middle">detectors + judge</text>
+
+  <path class="edge" d="M292 204 H308" style="marker-end: url(#arrow-ae)"></path>
+  <path class="edge" d="M509 148 V165 H383 V182" style="marker-end: url(#arrow-ae)"></path>
+
+  <rect class="node-accent" x="308" y="182" width="150" height="44" rx="3"></rect>
+  <text class="label" x="383" y="202" text-anchor="middle">Audit</text>
+  <text class="sublabel" x="383" y="218" text-anchor="middle">Ed25519-signed receipts</text>
+
+  <path class="edge" d="M383 226 V252" style="marker-end: url(#arrow-ae)"></path>
+
+  <rect class="node" x="308" y="252" width="150" height="40" rx="3"></rect>
+  <text class="label" x="383" y="276" text-anchor="middle">Dashboard</text>
+
+  <rect class="node" x="16" y="252" width="200" height="40" rx="3"></rect>
+  <text class="label" x="116" y="270" text-anchor="middle">Red-team engine</text>
+  <text class="sublabel" x="116" y="285" text-anchor="middle">adaptive campaigns</text>
+
+  <path class="edge" d="M116 252 V235 H81 V148" stroke-dasharray="4 3" style="marker-end: url(#arrow-ae)"></path>
+  <path class="edge" d="M116 252 V235 H227 V226" stroke-dasharray="4 3" style="marker-end: url(#arrow-ae)"></path>
+</svg>
