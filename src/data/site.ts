@@ -3,13 +3,13 @@ export const site = {
   shortName: 'Hamid Matiny',
   title: 'AI Infrastructure & MLOps Engineer',
   description:
-    'AI Infrastructure & MLOps Engineer specializing in LLM serving, GPU orchestration, and production observability. Building platforms for reliable model serving at scale.',
+    'AI Infrastructure & MLOps Engineer specializing in LLM serving, GPU orchestration, and production observability. 30 public repositories spanning LLM infra, data engineering, and computer vision.',
   url: 'https://hamidmatiny.github.io',
   email: 'hamidmatiny@gmail.com',
   github: 'https://github.com/hamidmatiny',
   githubUser: 'hamidmatiny',
   linkedin: 'https://www.linkedin.com/in/mohammadreza-matiny-46812121a',
-  roleNote: 'Torc Robotics · Data Quality Assurance ML Pipeline',
+  roleNote: 'Shipping AI infrastructure and data platforms across 30 public repositories.',
   location: 'Available globally · open to remote',
   yearsExperience: '4',
 } as const;
@@ -33,7 +33,7 @@ export const featured: FeaturedProject[] = [
     tagline:
       'Multi-backend LLM serving and GPU-orchestration platform — one contract across vLLM, Triton, Ray Serve, KServe, and BentoML.',
     status:
-      'Tagged v1.0.0 at phase-15. Main has since completed phases 16–22 (advisor, training, LoRA/PEFT, DVC, tracking) — CHANGELOG records 1.2.0; no v1.1.0/v1.2.0 Git tag yet.',
+      'Tagged v1.2.0 across 22 phases: advanced GPU serving (GPTQ/AWQ/FP8, TensorRT-LLM templates), cost-per-token tracking, training backends, LoRA/PEFT, DVC exports, pluggable MLflow/W&B tracking, and a tool-grounded LangGraph advisor with non-fabrication CI.',
     statusTone: 'live',
     url: 'https://github.com/hamidmatiny/Vulcan',
     architecture:
@@ -67,19 +67,19 @@ export const featured: FeaturedProject[] = [
     id: 'argus',
     name: 'Argus',
     tagline:
-      "Vulcan's sibling — unified fleet telemetry, data-quality, MLOps, and observability with an AI copilot.",
+      "Production-shaped fleet telemetry platform — Kafka/Ray/Flink ingest, Iceberg + Dagster lakehouse, drift detection, OPA-backed incidents, and a read-only AI copilot.",
     status:
-      'Architecture / early-build phase. Pipeline topology and contracts are defined; not a finished production system yet.',
-    statusTone: 'building',
+      "Tagged v1.0.0 — CHANGELOG calls it the first production-shaped release (Phases 0–15). 45 Docker Compose services, 41 test files (including Kafka integration tests), and 6 active CI workflows (ci, docker-build, semgrep, e2e-nightly, load-nightly, chaos-nightly).",
+    statusTone: 'live',
     url: 'https://github.com/hamidmatiny/Argus',
     architecture:
-      'Kafka/Redpanda ingest → Ray processing → Flink QA gate → Iceberg lakehouse → Dagster orchestration → drift-monitor → OPA-backed incident engine → OpenTelemetry → dashboard, plus a read-only AI copilot. Same containers run via Docker Compose locally or Terraform/Helm/Argo CD on EKS.',
+      'Redpanda/MSK → Ray ingest → stream-processor QA gate (Flink option) → Iceberg + Trino lakehouse → Dagster/MLflow orchestration → drift-monitor (KS tests, embeddings, Evidently) → OPA-backed incident-engine (circuit breakers) → api-gateway (OIDC/Keycloak, OPA RBAC) → Next.js dashboard, plus a read-only Qdrant-RAG AI copilot with its own eval harness. Same container images run via Docker Compose locally or Terraform + Helm (one chart per service) + Argo CD app-of-apps on EKS.',
     decisions: [
-      'Contract-first streaming path with an explicit Flink QA gate before lakehouse writes',
+      'Contract-first streaming path with an explicit QA gate before lakehouse writes',
       'Iceberg + Dagster for reproducible lakehouse materialization',
       'OPA policy for incident decisions — not prompt-only automation',
-      'Copilot is read-only against telemetry and runbooks',
-      'One image set for local Compose and EKS GitOps',
+      'Copilot is read-only against telemetry and runbooks, backed by an eval harness',
+      'Documented scope cuts (KNOWN_GAPS.md) instead of overclaiming — no service mesh/mTLS, Vault-backed secrets, or column-level lineage yet',
     ],
     stack: [
       'Kafka',
@@ -87,11 +87,110 @@ export const featured: FeaturedProject[] = [
       'Ray',
       'Flink',
       'Iceberg',
+      'Trino',
       'Dagster',
       'OpenTelemetry',
       'OPA',
       'Argo CD',
       'Terraform',
+      'Next.js',
+      'Qdrant',
+    ],
+  },
+  {
+    id: 'prism',
+    name: 'PRISM',
+    tagline:
+      'Multi-warehouse fleet-intelligence platform — camera/sensor ingest, a PySpark lakehouse with dbt gold models, and OpenCV/ONNX defect detection with human review.',
+    status:
+      'Tagged v1.2.0 — all 20 phases (0–19) complete, including a golden-path chaos e2e test against the live Compose stack. 17-service Docker Compose stack, 19 test files, 2 CI workflows (lint/test, Terraform validate + release packaging).',
+    statusTone: 'live',
+    url: 'https://github.com/hamidmatiny/PRISM',
+    architecture:
+      'Camera/sensor ingest lands in a bronze zone, then splits: a PySpark medallion lakehouse (bronze → silver → gold, dbt-modeled) on one side, an OpenCV/ONNX YOLO-family CV service on the other, routing low-confidence findings to a Django control-plane review queue. Gold data fans out through one activation contract to both Redshift and Snowflake, mirrors to Azure Databricks/ADLS for DR, and feeds a Vue 3 + Three.js digital-twin cockpit. An incident-engine runs per-asset circuit breakers on OPA/Rego trip policies; Dagster orchestrates the lakehouse and drift-monitor; a tool-grounded AI copilot answers only from evidence it can cite.',
+    decisions: [
+      'Two-layer Pydantic → Pandera validation gate before any bronze promotion',
+      'Per-asset circuit breakers driven by OPA/Rego trip policies, not hardcoded thresholds',
+      'Drift-monitor baselines never build from synthetic scenario data — health stays non-ready until a real baseline earns it',
+      'Copilot is tool-grounded — every answer must cite real evidence (ADR-004)',
+      'Cloud paths (AWS + Azure Terraform) are plan/validate/checkov-only in CI; human apply only (ADR-001)',
+    ],
+    stack: [
+      'PySpark',
+      'Databricks',
+      'dbt',
+      'OpenCV',
+      'ONNX / YOLO',
+      'Django',
+      'Vue 3 + Three.js',
+      'OPA / Rego',
+      'Dagster',
+      'Terraform',
+      'Snowflake',
+      'Redshift',
+    ],
+  },
+  {
+    id: 'forge',
+    name: 'FORGE',
+    tagline:
+      'Offline AV perception & auto-labeling platform — 2D/3D detection, tracking, sensor fusion, and active-learning pseudo-labeling over a versioned Parquet data lake.',
+    status:
+      'Tagged v0.2.0 — all 11 phases complete (ingest through visualize plus productionization). 15 test files, 2 CI workflows. Detection heads are randomly initialized research baselines, not trained on real labels — documented honestly in KNOWN_GAPS.md rather than overclaimed.',
+    statusTone: 'live',
+    url: 'https://github.com/hamidmatiny/FORGE',
+    architecture:
+      'The forge CLI runs an 8-stage pipeline end to end locally: ingest (nuScenes → Parquet lake, DVC, Hydra configs) → detect2d (Faster R-CNN) and detect3d (PointNet-style) → track (SORT: Kalman + Hungarian IoU) → fuse (calibrated projection + IoU) → label (trust scoring + active learning) → evaluate (BEV distance, mAP against held-out ground truth) → curate (LanceDB dedup) → visualize (rerun.io / Foxglove MCAP). A parallel cloud path — S3 → Lambda → SQS → DynamoDB → EventBridge → Step Functions → ECS Fargate → Glue (11 tables) → Athena — is Terraform-defined and structurally verified in CI, but intentionally never applied against live AWS.',
+    decisions: [
+      'Ground-truth labels used only for evaluation, never as a pipeline input — no label leakage',
+      'Every pipeline stage round-trips through a versioned Parquet lake instead of ad hoc intermediate files',
+      'Cloud orchestration built and CI-verified as code, deliberately never deployed — same cost-safety policy as Vulcan, PRISM, and hydra-data-factory',
+      'Ray distributed execution wired for the two heaviest stages (detect2d/detect3d); the rest run local by design',
+      'Random-init detectors are labeled as smoke-tested baselines, not tuned models — no inflated accuracy claims',
+    ],
+    stack: [
+      'PyTorch Lightning',
+      'Faster R-CNN',
+      'SORT',
+      'Ray',
+      'LanceDB',
+      'MLflow',
+      'W&B',
+      'DVC',
+      'Hydra',
+      'Terraform',
+      'Parquet',
+    ],
+  },
+  {
+    id: 'aegis',
+    name: 'aegis',
+    tagline:
+      'AI-native defense-in-depth gateway for LLM apps and agents — prompt injection, data exfiltration, and tool/MCP abuse, with a tamper-evident audit trail.',
+    status:
+      'Tagged v0.3.1 — all 12 build-order stages complete. 11-service Docker Compose stack, 53 test files, 3 CI workflows (ci, release, security). Publishes its own adaptive red-team result instead of a vendor catch-rate demo: real-model hardening cuts round-1 bypass rate (10.8% → 9.2%) but overall bypass rate under sustained adaptive attack stays flat at ~48%.',
+    statusTone: 'live',
+    url: 'https://github.com/hamidmatiny/aegis',
+    architecture:
+      'A Go gateway fronts the defended chat pipeline: requests pass through Python input-defense detectors, a Go policy-engine evaluating CEL policy packs, and a provider-agnostic Go model-router, then Python output-defense detectors (plus an LLM judge) before any response is released. A separate agent-gate (Go) enforces tool/MCP call permissions with taint tracking. Every enforcement decision is Ed25519-signed into a Postgres-backed audit trail. A continuous red-team engine runs adaptive campaigns directly against input/output defense — deliberately bypassing policy-engine — and publishes bypass-rate evidence to a React/TS dashboard.',
+    decisions: [
+      'Security decisions fail closed (gateway/policy-engine/agent-gate outage returns 502, never releases an unchecked response) — only observability fails open, documented explicitly in FAILURE_MODES.md',
+      'No static default credentials anywhere in the repo — dashboard and gateway keys are generated at container startup or via a credential script',
+      'Publishes its own adaptive red-team bypass rates honestly, including the unflattering result that hardening barely moves sustained bypass rate — continuous monitoring over a one-time "solved" claim',
+      'Red-team probes input/output defense directly, deliberately bypassing policy-engine, to measure detector effectiveness in isolation',
+      'Tamper-evident audit trail via Ed25519-signed receipts, not plain logs',
+    ],
+    stack: [
+      'Go',
+      'Python',
+      'TypeScript',
+      'CEL policy-as-code',
+      'Prompt-Guard',
+      'Toxic-BERT',
+      'spaCy NER',
+      'PostgreSQL',
+      'Redis',
+      'React',
     ],
   },
   {
@@ -133,12 +232,6 @@ export type SecondaryProject = {
 };
 
 export const alsoBuilding: SecondaryProject[] = [
-  {
-    name: 'aegis',
-    blurb:
-      'LLM/agent security gateway — prompt-injection defense, policy-as-code, tamper-evident audit trails, human approval for high-risk actions.',
-    url: 'https://github.com/hamidmatiny/aegis',
-  },
   {
     name: 'AegisFlow',
     blurb:
@@ -274,6 +367,19 @@ export const skills: SkillGroup[] = [
     ],
   },
   {
+    category: 'Computer Vision & Perception',
+    items: [
+      'OpenCV',
+      'ONNX',
+      'YOLO / ByteTrack',
+      '2D/3D detection & tracking',
+      'Sensor fusion (radar / LiDAR / camera)',
+      'PyTorch',
+      'Active learning / pseudo-labeling',
+      'Edge AI',
+    ],
+  },
+  {
     category: 'Data & Streaming Systems',
     items: [
       'Kafka / Redpanda',
@@ -285,6 +391,8 @@ export const skills: SkillGroup[] = [
       'Airflow',
       'Step Functions',
       'Ray',
+      'PySpark / Databricks',
+      'dbt',
     ],
   },
   {
