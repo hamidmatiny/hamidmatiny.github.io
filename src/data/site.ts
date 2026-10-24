@@ -3,13 +3,13 @@ export const site = {
   shortName: 'Hamid Matiny',
   title: 'AI Infrastructure & MLOps Engineer',
   description:
-    'AI Infrastructure & MLOps Engineer specializing in LLM serving, GPU orchestration, and production observability. 30 public repositories spanning LLM infra, data engineering, and computer vision.',
+    'AI Infrastructure & MLOps Engineer specializing in LLM serving, GPU orchestration, agentic systems, and production observability. 10 core repositories spanning LLM infra, multi-agent incident response, data engineering, and computer vision.',
   url: 'https://hamidmatiny.github.io',
   email: 'hamidmatiny@gmail.com',
   github: 'https://github.com/hamidmatiny',
   githubUser: 'hamidmatiny',
   linkedin: 'https://www.linkedin.com/in/mohammadreza-matiny-46812121a',
-  roleNote: 'Shipping AI infrastructure and data platforms across 30 public repositories.',
+  roleNote: 'Shipping AI infrastructure, agentic systems, and data platforms across 10 core repositories.',
   location: 'Available globally · open to remote',
   yearsExperience: '4',
 } as const;
@@ -69,7 +69,7 @@ export const featured: FeaturedProject[] = [
     tagline:
       "Production-shaped fleet telemetry platform — Kafka/Ray/Flink ingest, Iceberg + Dagster lakehouse, drift detection, OPA-backed incidents, and a read-only AI copilot.",
     status:
-      "Tagged v1.0.0 — CHANGELOG calls it the first production-shaped release (Phases 0–15). 45 Docker Compose services, 41 test files (including Kafka integration tests), and 6 active CI workflows (ci, docker-build, semgrep, e2e-nightly, load-nightly, chaos-nightly).",
+      "Tagged v1.0.0 — CHANGELOG calls it the first production-shaped release (Phases 0–15). 32 Docker Compose services, 40 test files (including Kafka integration tests) plus e2e chaos, smoke, and k6 load scripts, and 6 active CI workflows (ci, docker-build, semgrep, e2e-nightly, load-nightly, chaos-nightly).",
     statusTone: 'live',
     url: 'https://github.com/hamidmatiny/Argus',
     architecture:
@@ -168,7 +168,7 @@ export const featured: FeaturedProject[] = [
     tagline:
       'AI-native defense-in-depth gateway for LLM apps and agents — prompt injection, data exfiltration, and tool/MCP abuse, with a tamper-evident audit trail.',
     status:
-      'Tagged v0.3.1 — all 12 build-order stages complete. 11-service Docker Compose stack, 53 test files, 3 CI workflows (ci, release, security). Publishes its own adaptive red-team result instead of a vendor catch-rate demo: real-model hardening cuts round-1 bypass rate (10.8% → 9.2%) but overall bypass rate under sustained adaptive attack stays flat at ~48%.',
+      'Tagged v0.6.0 — all 12 build-order stages plus a second hardening pass (stages A–D) complete. 14-service Docker Compose stack, 89 test files, 4 CI workflows (ci, release, security, arm-auto-merge). Publishes its own adaptive red-team result instead of a vendor catch-rate demo, reporting round-1 and adaptive bypass rates separately: real-model hardening cuts round-1 bypass rate (10.8% → 9.2%), while by round 3 of an adaptive campaign bypass rate is 72.8% → 75.0%.',
     statusTone: 'live',
     url: 'https://github.com/hamidmatiny/aegis',
     architecture:
@@ -191,6 +191,40 @@ export const featured: FeaturedProject[] = [
       'PostgreSQL',
       'Redis',
       'React',
+    ],
+  },
+  {
+    id: 'meridian',
+    name: 'MERIDIAN',
+    tagline:
+      'Multi-agent data-incident response on LangGraph — detects a pipeline data-quality failure, finds the root cause with MCP tools, writes and verifies a sandboxed fix, and holds it for human approval in Slack.',
+    status:
+      'Tagged v1.0.1 — Phases 0–7 complete. 558 offline tests with CI green on Linux, a 9-node LangGraph state machine, 3 MCP servers, and 1 CI workflow. On a 72-case synthetic benchmark: 72/72 detection, 71/72 causal accuracy, 0/27 false fixes, 0/30 hard-mode false positives, and the deterministic verifier blocked 16/16 bad patches the LLM critic approved. $0.00 on local models. Caveat: synthetic benchmark; fix attempts exhausted on 26/72 cases.',
+    statusTone: 'live',
+    url: 'https://github.com/hamidmatiny/MERIDIAN',
+    architecture:
+      'A fixed LangGraph state machine, not an open-ended agent chat. Sentinel runs pandera contracts over partitions on Ray and emits a typed Incident. Triage sets severity and blast radius; RootCause queries three read-only MCP servers (lineage, data, history) and writes a Hypothesis whose evidence must cite refs the tools returned. Fix writes a Patch (repair, quarantine, rerun upstream, or escalate) plus a pandera regression test; a pre-critic dry run and a second-model Critic review it for up to 3 rounds. A deterministic Verifier replays the failing partition in a Ray sandbox and returns to Fix for up to 3 attempts. SlackApproval interrupts the graph until an allowlisted person approves; a Postmortem and a hash-chained audit log in Postgres record the outcome. Live runs default to local Ollama models.',
+    decisions: [
+      'Deterministic state machine with hard loop caps — loop exhaustion is a recorded outcome, not an accident (ADR-001)',
+      'The verifier is code, not a model: 16 bad patches the LLM critic approved were blocked before reaching a human (ADR-005, ADR-021)',
+      'Grounding guardrail drops any cited event the MCP tools never returned (ADR-016)',
+      'Untrusted remediation code runs behind an AST import gate in a Ray worker with a cleared environment (ADR-019)',
+      'Free local models first; paid providers off unless explicitly enabled with a USD cap, and billing or quota errors stop the run (ADR-023, ADR-024)',
+      'Benchmark reports n/N with its caveats published: synthetic data, an easy evidence world (48/72 single candidate), and fix attempts exhausted on 26/72 cases (ADR-033)',
+    ],
+    stack: [
+      'LangGraph',
+      'LangChain',
+      'MCP',
+      'Pydantic',
+      'pandera',
+      'Ray',
+      'Ollama',
+      'Slack Bolt',
+      'OpenTelemetry',
+      'PostgreSQL',
+      'Alembic',
+      'Docker Compose',
     ],
   },
   {
@@ -396,14 +430,20 @@ export const skills: SkillGroup[] = [
     ],
   },
   {
-    category: 'Security & Agentic Systems',
+    category: 'Agentic AI & LLM Security',
     items: [
-      'Prompt-injection defense',
-      'Policy-as-code (OPA)',
       'LangGraph',
+      'LangChain',
+      'Model Context Protocol (MCP)',
+      'Multi-agent state machines',
+      'Human-in-the-loop approval',
+      'LLM evaluation & benchmarks',
+      'Ollama (local LLMs)',
       'PydanticAI',
       'Temporal',
-      'Audit trails',
+      'Prompt-injection defense',
+      'Policy-as-code (OPA)',
+      'Tamper-evident audit trails',
       'Red-teaming patterns',
     ],
   },

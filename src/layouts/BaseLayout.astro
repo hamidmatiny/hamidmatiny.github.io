@@ -21,7 +21,6 @@ const jsonLd = {
       alternateName: ['Hamid Matiny', 'Mohammadreza "Hamid" Matiny'],
       url: site.url,
       email: site.email,
-      jobTitle: site.title,
       sameAs: [site.github, site.linkedin],
       knowsAbout: [
         'LLM serving',
@@ -31,6 +30,8 @@ const jsonLd = {
         'AI infrastructure',
         'Computer vision',
         'Data engineering',
+        'Multi-agent systems',
+        'Data-incident response',
       ],
     },
     {
@@ -83,6 +84,16 @@ const jsonLd = {
         'Multi-warehouse fleet-intelligence platform with a Databricks-style lakehouse, dbt gold models, and OpenCV/ONNX defect detection.',
       url: 'https://github.com/hamidmatiny/PRISM',
       codeRepository: 'https://github.com/hamidmatiny/PRISM',
+      author: { '@id': `${site.url}/#person` },
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      name: 'MERIDIAN',
+      description:
+        'Multi-agent LangGraph system for data-incident response with MCP root-cause tools, a deterministic sandboxed verifier, and human approval in Slack.',
+      url: 'https://github.com/hamidmatiny/MERIDIAN',
+      codeRepository: 'https://github.com/hamidmatiny/MERIDIAN',
+      programmingLanguage: ['Python'],
       author: { '@id': `${site.url}/#person` },
     },
     {

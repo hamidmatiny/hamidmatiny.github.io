@@ -1,0 +1,73 @@
+---
+
+---
+
+<svg class="diagram" viewBox="0 0 580 284" role="img" aria-labelledby="meridian-diagram-title meridian-diagram-desc">
+  <title id="meridian-diagram-title">MERIDIAN agent graph</title>
+  <desc id="meridian-diagram-desc">
+    A fixed LangGraph state machine. Sentinel runs pandera contracts on Ray and emits an incident. Triage sets severity, root cause queries three MCP servers, and fix writes a patch with a regression test. A pre-critic dry run and a second-model critic review the patch, with up to three critic rounds. A deterministic verifier replays the failing partition in a sandbox, returning to fix for up to three attempts. Slack approval holds the patch for a human, then a postmortem is written.
+  </desc>
+  <defs>
+    <marker id="arrow-m" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" style="fill: var(--border-strong)"></path>
+    </marker>
+  </defs>
+
+  <rect class="node" x="16" y="30" width="160" height="50" rx="3"></rect>
+  <text class="label" x="96" y="52" text-anchor="middle">Sentinel</text>
+  <text class="sublabel" x="96" y="68" text-anchor="middle">pandera on Ray</text>
+
+  <path class="edge" d="M176 55 H210" style="marker-end: url(#arrow-m)"></path>
+
+  <rect class="node" x="210" y="30" width="160" height="50" rx="3"></rect>
+  <text class="label" x="290" y="52" text-anchor="middle">Triage</text>
+  <text class="sublabel" x="290" y="68" text-anchor="middle">severity · blast radius</text>
+
+  <path class="edge" d="M370 55 H404" style="marker-end: url(#arrow-m)"></path>
+
+  <rect class="node-accent" x="404" y="30" width="160" height="50" rx="3"></rect>
+  <text class="label" x="484" y="52" text-anchor="middle">Root cause</text>
+  <text class="sublabel" x="484" y="68" text-anchor="middle">3 MCP servers</text>
+
+  <path class="edge" d="M484 80 V118" style="marker-end: url(#arrow-m)"></path>
+
+  <rect class="node-accent" x="404" y="118" width="160" height="50" rx="3"></rect>
+  <text class="label" x="484" y="140" text-anchor="middle">Fix</text>
+  <text class="sublabel" x="484" y="156" text-anchor="middle">patch + regression test</text>
+
+  <path class="edge" d="M404 143 H370" style="marker-end: url(#arrow-m)"></path>
+
+  <rect class="node" x="210" y="118" width="160" height="50" rx="3"></rect>
+  <text class="label" x="290" y="140" text-anchor="middle">Pre-critic</text>
+  <text class="sublabel" x="290" y="156" text-anchor="middle">sandbox dry run</text>
+
+  <path class="edge" d="M210 143 H176" style="marker-end: url(#arrow-m)"></path>
+
+  <rect class="node" x="16" y="118" width="160" height="50" rx="3"></rect>
+  <text class="label" x="96" y="140" text-anchor="middle">Critic</text>
+  <text class="sublabel" x="96" y="156" text-anchor="middle">second model</text>
+
+  <path class="edge" d="M60 118 V100 H444 V118" stroke-dasharray="4 3" style="marker-end: url(#arrow-m)"></path>
+  <text class="sublabel" x="252" y="96" text-anchor="middle">rejected · up to 3 rounds</text>
+
+  <path class="edge" d="M96 168 V206" style="marker-end: url(#arrow-m)"></path>
+
+  <rect class="node-accent" x="16" y="206" width="160" height="50" rx="3"></rect>
+  <text class="label" x="96" y="228" text-anchor="middle">Verifier</text>
+  <text class="sublabel" x="96" y="244" text-anchor="middle">deterministic replay</text>
+
+  <path class="edge" d="M150 206 V188 H524 V168" stroke-dasharray="4 3" style="marker-end: url(#arrow-m)"></path>
+  <text class="sublabel" x="337" y="184" text-anchor="middle">failed · up to 3 fix attempts</text>
+
+  <path class="edge" d="M176 231 H210" style="marker-end: url(#arrow-m)"></path>
+
+  <rect class="node-accent" x="210" y="206" width="160" height="50" rx="3"></rect>
+  <text class="label" x="290" y="228" text-anchor="middle">Slack approval</text>
+  <text class="sublabel" x="290" y="244" text-anchor="middle">human gate</text>
+
+  <path class="edge" d="M370 231 H404" style="marker-end: url(#arrow-m)"></path>
+
+  <rect class="node" x="404" y="206" width="160" height="50" rx="3"></rect>
+  <text class="label" x="484" y="228" text-anchor="middle">Postmortem</text>
+  <text class="sublabel" x="484" y="244" text-anchor="middle">report + audit chain</text>
+</svg>
